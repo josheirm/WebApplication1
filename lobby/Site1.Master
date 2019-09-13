@@ -18,8 +18,16 @@
     </asp:ContentPlaceHolder>
     
     <style type="text/css">
-        .auto-style1 {
-            margin-left: 276px;
+        .auto-style2 {
+            position: relative;
+            width: 100%;
+            -ms-flex: 0 0 33.333333%;
+            flex: 0 0 33.333333%;
+            max-width: 33.333333%;
+            left: 0px;
+            top: 0px;
+            padding-left: 15px;
+            padding-right: 15px;
         }
     </style>
     
@@ -34,8 +42,20 @@
             <div class = "contianer">
                 <div class = "row">
                  <div class="col-sm-4">
-                    <h3>column 1</h3>
-                    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in</p>
+                    <!--<h3>column 1<asp:Button ID="Button1" runat="server" Text="Button" /> </h3>-->
+                     <p>Guess the Number!</p>
+                     <p>
+                         
+                         <asp:Button ID="Button6" runat="server" OnClick="Button1_Click" Text="1" />
+                         <asp:Button ID="Button2" runat="server" OnClick="Button2_Click" Text="2" />
+                         <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="3" />
+                         <asp:Button ID="Button4" runat="server" OnClick="Button4_Click" Text="4" />
+                         <asp:Button ID="Button5" runat="server" OnClick="Button5_Click" Text="5" />
+
+
+                     </p>
+                   
+                     <!--<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in</p>*/-->
                     
                 </div>
 
