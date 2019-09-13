@@ -39,7 +39,7 @@ namespace WebApplication2
         OneChatRoom a = new OneChatRoom("y", "y", "y");
         OneChatRoom b = new OneChatRoom("b", "b", "b");
         OneChatRoom d = new OneChatRoom("z", "z", "z");
-
+         
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
