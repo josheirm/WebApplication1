@@ -37,11 +37,15 @@ namespace lobby
 
         int rand = 0;
         List<OneChatRoom> list1 = new List<OneChatRoom>();
+        
         List<OneChatRoom> list2 = new List<OneChatRoom>();
         List<OneChatRoom> list3 = new List<OneChatRoom>();
         List<OneChatRoom> list4 = new List<OneChatRoom>();
         List<OneChatRoom> list5 = new List<OneChatRoom>();
         OneChatRoom a = new OneChatRoom("y", "y", "y");
+
+
+       
         //OneChatRoom b = new OneChatRoom("b", "b", "b");
         //OneChatRoom d = new OneChatRoom("z", "z", "z");
 
@@ -81,9 +85,18 @@ namespace lobby
                 Application["randomnumber1"] = rand;
                 Application["whoseturnisit"] = 1;
                 Label1.Text = rand.ToString();
+                //initial set
+                Application["Application_list1"] = list1;
+                Application["Application_list2"] = list2;
+                Application["Application_list3"] = list3;
+                Application["Application_list4"] = list4;
+                Application["Application_list5"] = list5;
+
+
+
 
             }
-            
+
 
             // string temp = Session["string1"];
 
@@ -95,12 +108,115 @@ namespace lobby
 
         protected void Button1_Click(object sender, EventArgs e)
         {
+
+            if(Session["MyUserNumber"] != Application["whoseturnisit"])
+            {
+                return;
+            }
+            //get code and proceed
+            else
+            {
+
+
+
+
+            }
+            //list1 = (List<OneChatRoom>)Application["Application_list1"];
+
+            //OneChatRoom msg = new OneChatRoom("y", "y", "y");
+            //list1.Add(msg);
+            //OneChatRoom msg1 = new OneChatRoom("z", "z", "z");
+            //list1.Add(msg1);
+
+            //Application["Holder"] = list1;
+           
+            //list1 = (List<OneChatRoom>)Application["Holder"];
+
+
+
             Button6.Enabled = false;
             var  holder1 = Application["randomnumber1"];
+            //you won got right pick
             if (holder1 == "1")
             {
-                
+                list2.Add(a);
                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "alert('You Win!'); ", true);
+
+            }
+            //wrong pick - send message with disable code
+            else
+            {
+
+
+
+
+                //assumption : person in same room and is in room object
+               
+
+
+                
+                //this, below, a function
+
+                OneChatRoom message = new OneChatRoom("1", "0", "0");
+                //list1.Add(msg1);
+
+                var roomnumber = 1;
+                //variable at previous screen
+
+                //sends message
+                switch (roomnumber)
+                {
+                    case 1:
+                        list1.Add(message);
+                        Application["Application_list1"] = list1;
+                        break;
+
+                    case 2:
+                        list2.Add(message);
+                        Application["Application_list2"] = list2;
+                        break;
+                    case 3:
+                        list3.Add(message);
+                        Application["Application_list3"] = list3;
+                        break;
+                    case 4:
+                        list4.Add(message);
+                        Application["Application_list4"] = list4;
+                        break;
+                    case 5:
+                        list5.Add(message);
+                        Application["Application_list5"] = list5;
+                        break;
+                    //case 6:
+                    //    list2.Add(msg);
+                    //    break;
+                    //case 7:
+                    //    list2.Add(msg);
+                    //    break;
+                    //case 8:
+                    //    list2.Add(msg);
+                    //    break;
+                    //case 9:
+                    //    list2.Add(msg);
+                    //    break;
+                    //case 10:
+                    //    list2.Add(msg);
+                    //    break;
+
+                    default:
+
+                        break;
+                }
+                var temp = Application["whoseturnisit"];
+                if ((string)temp == "1")
+                {
+                    Application["whoseturnisit"] = 0;
+                }
+                else
+                {
+                    Application["whoseturnisit"] = 1;
+                }
+
 
             }
 
