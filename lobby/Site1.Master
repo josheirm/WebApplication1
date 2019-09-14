@@ -17,21 +17,7 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     
-    <style type="text/css">
-        .auto-style2 {
-            position: relative;
-            width: 100%;
-            -ms-flex: 0 0 33.333333%;
-            flex: 0 0 33.333333%;
-            max-width: 33.333333%;
-            left: 0px;
-            top: 0px;
-            padding-left: 15px;
-            padding-right: 15px;
-        }
-    </style>
-    
-</head>
+    </head>
 <body>
     <form id="form1" runat="server">
         <div>
@@ -51,6 +37,10 @@
                          <asp:Button ID="Button3" runat="server" OnClick="Button3_Click" Text="3" />
                          <asp:Button ID="Button4" runat="server" OnClick="Button4_Click" Text="4" />
                          <asp:Button ID="Button5" runat="server" OnClick="Button5_Click" Text="5" />
+
+
+                     &nbsp;&nbsp;&nbsp;
+                         <asp:Label ID="Label1" runat="server" Text="picked number"></asp:Label>
 
 
                      </p>

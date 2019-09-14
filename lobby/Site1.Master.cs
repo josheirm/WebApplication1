@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+
 public class OneChatRoom
 {
 
@@ -29,7 +30,12 @@ namespace lobby
     public partial class Site1 : System.Web.UI.MasterPage
     {
 
-       
+
+
+        //string b = a;
+
+
+        int rand = 0;
         List<OneChatRoom> list1 = new List<OneChatRoom>();
         List<OneChatRoom> list2 = new List<OneChatRoom>();
         List<OneChatRoom> list3 = new List<OneChatRoom>();
@@ -49,17 +55,48 @@ namespace lobby
         //    List<OneChatRoom> list2 = new List<OneChatRoom>();
 
         //}
+        protected void Application_Start(object sender, EventArgs e)
+        {
+            // Session["string1"] = rand.ToString();
+
+
+           
+        }
+
+        protected void Session_Start(object sender, EventArgs e)
+        {
+            
+
+            //Label1.Text = "aa";// Application["randomnumber1"].ToString();
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            Application["randomnumber1"]  = new Random().Next(1, 5);
+            if (Page.IsPostBack)
+            {
+            }
+            else
+            {
+                rand = new Random().Next(1, 5);
+                Application["randomnumber1"] = rand;
+                Application["whoseturnisit"] = 1;
+                Label1.Text = rand.ToString();
 
-            Application["whoseturnisit"] = 1;
+            }
+            
+
+            // string temp = Session["string1"];
+
+            // Label1.Text = Session["string1"];
+
+
         }
+        
 
         protected void Button1_Click(object sender, EventArgs e)
         {
             Button6.Enabled = false;
-            var  holder1 = Application["randomnumber1"].ToString();
+            var  holder1 = Application["randomnumber1"];
             if (holder1 == "1")
             {
                 
@@ -111,7 +148,7 @@ namespace lobby
         protected void Button5_Click(object sender, EventArgs e)
         {
             Button5.Enabled = false;
-            var holder1 = Application["randomnumber1"].ToString();
+            var holder1 = Application["randomnumber1"];
             if (holder1 == "5")
             {
 
