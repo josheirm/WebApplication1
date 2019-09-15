@@ -119,5 +119,19 @@
 
        
     </form>
+
+    <script  type ="text/javascript" >
+            function myFunction() {
+
+                var vUserName = document.getElementById("Button7").disabled = false;
+                //var vPassword = document.getElementById("Button8").value;
+                //vUserName.
+                //var vFullInfo = vUserName + '\r\n' + vPassword;
+
+                alert(vFullInfo);
+                return false;
+            }
+</script>
+
 </body>
 </html>

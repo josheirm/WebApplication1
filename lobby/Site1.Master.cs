@@ -10,7 +10,7 @@ public class SessionTest
     public string GetSession(string SessionVariable)
     {
 
-        Session["A"] = "";
+        //Session["A"] = "";
         return SessionVariable;
 
     }
@@ -387,11 +387,11 @@ namespace lobby
 
             string var = "0";
 
-            MyClass MyClass1 = new MyClass();
+            //MyClass MyClass1 = new MyClass();
 
-            Application["Temp"] = "TestValue";
-            SessionTest sessionTest = new SessionTest();
-            sessionTest.GetSession(Application["Temp"].ToString());
+            //Application["Temp"] = "TestValue";
+            //SessionTest sessionTest = new SessionTest();
+            //sessionTest.GetSession(Application["Temp"].ToString());
 
         }
     }
@@ -425,8 +425,11 @@ public class ChangeUser
         {
             HttpContext.Current.Session["whoseturnisit"] = "1";
         }
-    }
+        }
        
+
+    public string a { get; set; }
+
 }
 
 
