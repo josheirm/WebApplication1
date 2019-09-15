@@ -1,4 +1,6 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="lobby.Site1" %>
+﻿
+
+<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.master.cs" Inherits="lobby.Site1" %>
 
 <!DOCTYPE html>
 
@@ -44,14 +46,57 @@
 
 
                      </p>
+                     <p>
+                         
+                         <asp:Button ID="Button7" runat="server" Text="You are Player 1" OnClick="Button7_Click" />
+                         <asp:Button ID="Button8" runat="server" Text="You are Player 2" OnClick="Button8_Click" />
+
+
+                     </p>
+                     <p>
+                         
+                         <asp:Label ID="Label2" runat="server" Text="Label2"></asp:Label>
+
+
+                     </p>
+                     <p>
+                         
+                         <asp:Label ID="Label3" runat="server" Text="Label3"></asp:Label>
+
+
+                     </p>
+                     <p>
+                         
+                         <asp:Label ID="Label4" runat="server" Text="Label4"></asp:Label>
+
+
+                     </p>
+                     <p>
+                         
+                         <asp:Label ID="Label5" runat="server" Text="Label5"></asp:Label>
+
+
+                     </p>
+                     <p>
+                         
+                         <asp:Button ID="Button9" runat="server" OnClick="Button9_Click" Text="Button" />
+                     </p>
+                     <p>
+                         
+                         &nbsp;</p>
+                     <p>
+                         
+                         &nbsp;</p>
+                     <p>
+                         
+                         &nbsp;</p>
                    
                      <!--<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in</p>*/-->
                     
                 </div>
 
                 <div class="col-sm-4">
-                    <h3>column 1</h3>
-                    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written intext is here</p>
+                    <h3>column 1 <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written intext is here</p>
                     
                 </div>
                 <div class="col-sm-4">
