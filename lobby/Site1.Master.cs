@@ -134,187 +134,18 @@ namespace lobby
         //player one goes first
         protected void Button1_Click(object sender, EventArgs e)
         {
+            Button6.Enabled = false;
 
             //this is the main hack!
             //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
             //whosturnisit is : 1
 
-            
+
             //this goes second - user one done
-            
+
             //receive code - user 1 goes first this is player 2
-            if (Session["MyUserNumber"] != Application["whoseturnisit"] )
-            {
 
-                ////////////for testing
-                string msg = "1";
-                OneChatRoom message = new OneChatRoom(msg, "0", "0");
-                list1.Add(message);
-                Application["Application_list1"] = list1;
-                //list1.Add(message);
-                list1 = (List<OneChatRoom>)Application["Application_list1"];
-                //////////end testing
-
-
-                //TWO OF THESE!!!!! - determined by previous page - hack
-                var roomnumber = 1;
-
-                if (roomnumber == 1)
-                {
-                    //the code is the number of the button sent to disable
-                    var code = (List<OneChatRoom>)Application["Application_list1"];
-                    list1.RemoveAt(0);
-                    //Session["thecode"] = code ;
-
-                    //to use after
-
-                    //held in an application variable
-                    Application["Application_list1"] = list1;
-                    Button6.Enabled = false;
-
-
-                }
-                else if (roomnumber == 2)
-                {
-                    var code = (List<OneChatRoom>)Application["Application_list2"];
-                    list2.RemoveAt(0);
-                    //Session["thecode"] = code;
-                    Application["Application_list2"] = list2;
-                    Button2.Enabled = false;
-                }
-                else if (roomnumber == 3)
-                {
-                    var code = (List<OneChatRoom>)Application["Application_list3"];
-                    list3.RemoveAt(0);
-                    //Session["thecode"] = code;
-                    Application["Application_list3"] = list3;
-                    Button3.Enabled = false;
-                }
-                else if (roomnumber == 4)
-                {
-                    var code = (List<OneChatRoom>)Application["Application_list4"];
-                    list4.RemoveAt(0);
-                    //Session["thecode"] = code;
-                    Application["Application_list4"] = list4;
-                    Button4.Enabled = false;
-                }
-                else if (roomnumber == 5)
-                {
-                    var code = (List<OneChatRoom>)Application["Application_list5"];
-                    list5.RemoveAt(0);
-                    //Session["thecode"] = code;
-                    Application["Application_list5"] = list5;
-                    Button5.Enabled = false;
-                }
-
-               
-                               
-                // now switch users and return out so user sends next time
-                var temp = Application["whoseturnisit"];
-                if (temp == "1")
-                {
-                    Application["whoseturnisit"] = "0";
-                }
-                else
-                {
-                    Application["whoseturnisit"] = "1";
-                }
-
-                
-
-                return;
-
-            }
-            
-            //send code
-            //player 1 goes first
-            //this is player one's first run through
-            if (Session["MyUserNumber"] == Application["whoseturnisit"] )
-            {
-                
-                ///////////////////////////////////////////////
-                //this here is send a message, above is receive
-                ///////////////////////////////////////////////
-
-                //this is button one, really - user chose button one 
-
-                Button6.Enabled = false;
-                var holder1 = Application["randomnumber1"];
-
-                //you won got right pick
-                if (holder1.ToString() == "1")
-                {
-                    //list1.Add(a);
-                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "alert('You Win!'); ", true);
-
-                }
-
-
-                //wrong pick - send message with code to disable
-                else
-                {
-
-                    ///////////////////////////////////////////////////////////////////////
-                    //this, below, a function//////////////////////////////////////////////
-                    ///////////////////////////////////////////////////////////////////////
-                    string msg = holder1.ToString(); 
-                    OneChatRoom message = new OneChatRoom(msg, "0", "0");
-                    //list1.Add(msg1);
-
-
-                    //////////!!!!!!!!!!!!!!!!!!!!!TWO OF THESE!!!! forcing
-                    //variable set at previous screen
-                    var roomnumber = 1;
-
-
-                    //sends message
-                    switch (roomnumber)
-                    {
-                        case 1:
-                            list1.Add(message);
-                            Application["Application_list1"] = list1;
-                            break;
-
-                        case 2:
-                            list2.Add(message);
-                            Application["Application_list2"] = list2;
-                            break;
-                        case 3:
-                            list3.Add(message);
-                            Application["Application_list3"] = list3;
-                            break;
-                        case 4:
-                            list4.Add(message);
-                            Application["Application_list4"] = list4;
-                            break;
-                        case 5:
-                            list5.Add(message);
-                            Application["Application_list5"] = list5;
-                            break;
-
-
-                        default:
-
-                            break;
-                    }
-
-                    //switch whose turn
-                    var temp = Application["whoseturnisit"];
-                    if (temp == "1")
-                    {
-                        Application["whoseturnisit"] = "0";
-                    }
-                    else
-                    {
-                        Application["whoseturnisit"] = "1";
-                    }
-
-
-                }
-
-               
-            }
         }
         protected void Button2_Click(object sender, EventArgs e)
         {
@@ -395,19 +226,10 @@ namespace lobby
 
         }
     }
+
+//namespace
 }
 
-public class ReceiveCode
-{
-
-
-
-}
-
-public class SendCode
-{
-
-}
 
 
 
@@ -425,16 +247,191 @@ public class ChangeUser
         {
             HttpContext.Current.Session["whoseturnisit"] = "1";
         }
-        }
-       
-
-    public string a { get; set; }
+    }
 
 }
 
 
 
-                    
+
+///////////////9/15/19
+///RECIEVE
+class MyClass
+{
+
+    public void Receive(ref int buttontodisable, ref List<OneChatRoom> list1, ref List<OneChatRoom> list2, ref List<OneChatRoom> list3, ref List<OneChatRoom> list4, ref List<OneChatRoom> list5)
+    {
 
 
+        if (HttpContext.Current.Session["MyUserNumber"] != HttpContext.Current.Application["whoseturnisit"])
+        {
+
+            ////////////for testing
+            string msg = "1";
+            OneChatRoom message = new OneChatRoom(msg, "0", "0");
+            list1.Add(message);
+            HttpContext.Current.Application["Application_list1"] = list1;
+            //list1.Add(message);
+            list1 = (List<OneChatRoom>)HttpContext.Current.Application["Application_list1"];
+            //////////end testing
+
+
+            //TWO OF THESE!!!!! - determined by previous page - hack
+            var roomnumber = 1;
+
+            if (roomnumber == 1)
+            {
+
+                //the code is the number of the button sent to disable
+                var code = (List<OneChatRoom>)HttpContext.Current.Application["Application_list1"];
+                list1.RemoveAt(0);
+                //Session["thecode"] = code ;
+
+                //to use after
+
+                //held in an HttpContext.Current.Application variable
+                HttpContext.Current.Application["Application_list1"] = list1;
+                ////Button6.Enabled = false;
+                
+
+
+            }
+            else if (roomnumber == 2)
+            {
+                var code = (List<OneChatRoom>)HttpContext.Current.Application["Application_list2"];
+                list2.RemoveAt(0);
+                //Session["thecode"] = code;
+                HttpContext.Current.Application["Application_list2"] = list2;
+                ////Button2.Enabled = false;
+            }
+            else if (roomnumber == 3)
+            {
+                var code = (List<OneChatRoom>)HttpContext.Current.Application["Application_list3"];
+                list3.RemoveAt(0);
+                //Session["thecode"] = code;
+                HttpContext.Current.Application["Application_list3"] = list3;
+                ////Button3.Enabled = false;
+            }
+            else if (roomnumber == 4)
+            {
+                var code = (List<OneChatRoom>)HttpContext.Current.Application["Application_list4"];
+                list4.RemoveAt(0);
+                //Session["thecode"] = code;
+                HttpContext.Current.Application["Application_list4"] = list4;
+                ////Button4.Enabled = false;
+            }
+            else if (roomnumber == 5)
+            {
+                var code = (List<OneChatRoom>)HttpContext.Current.Application["Application_list5"];
+                list5.RemoveAt(0);
+                //Session["thecode"] = code;
+                HttpContext.Current.Application["Application_list5"] = list5;
+                ////Button5.Enabled = false;
+            }
+
+
+
+           
+
+
+            // return;
+
+        }
+    }
+}
+
+
+////////////////////
+///
+
+//send code
+//player 1 goes first
+//this is player one's first run through
+
+//adter send message disable button from caller instead
+
+class MyClass2
+{
+    public void SendMessage(int buttonpressed, ref List<OneChatRoom> list1, ref List<OneChatRoom> list2, ref List<OneChatRoom> list3, ref List<OneChatRoom> list4, ref List<OneChatRoom> list5)
+    {
+
+        if (HttpContext.Current.Session["MyUserNumber"] == HttpContext.Current.Application["whoseturnisit"])
+        {
+
+            ///////////////////////////////////////////////
+            //this here is send a message, above is receive
+            ///////////////////////////////////////////////
+
+            //this is button one, really - user chose button one 
+
+            ////Button6.Enabled = false;
+            var holder1 = HttpContext.Current.Application["randomnumber1"];
+
+            //you won got right pick
+            if (holder1.ToString() == "1")
+            {
+                //list1.Add(a);
+                ////Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "alert('You Win!'); ", true);
+
+            }
+
+
+            //wrong pick - send message with code to disable
+            else
+            {
+
+                ///////////////////////////////////////////////////////////////////////
+                //this, below, a function//////////////////////////////////////////////
+                ///////////////////////////////////////////////////////////////////////
+                string msg = holder1.ToString();
+                OneChatRoom message = new OneChatRoom(msg, "0", "0");
+                //list1.Add(msg1);
+
+
+                //////////!!!!!!!!!!!!!!!!!!!!!TWO OF THESE!!!! forcing
+                //variable set at previous screen
+                var roomnumber = 1;
+
+
+                //sends message
+                switch (roomnumber)
+                {
+                    case 1:
+                        list1.Add(message);
+                        HttpContext.Current.Application["Application_list1"] = list1;
+                        break;
+
+                    case 2:
+                        list2.Add(message);
+                        HttpContext.Current.Application["Application_list2"] = list2;
+                        break;
+                    case 3:
+                        list3.Add(message);
+                        HttpContext.Current.Application["Application_list3"] = list3;
+                        break;
+                    case 4:
+                        list4.Add(message);
+                        HttpContext.Current.Application["Application_list4"] = list4;
+                        break;
+                    case 5:
+                        list5.Add(message);
+                        HttpContext.Current.Application["Application_list5"] = list5;
+                        break;
+
+
+                    default:
+
+                        break;
+                }
+
+                
+
+
+            }
+
+
+        }
+
+    }
+}
 
