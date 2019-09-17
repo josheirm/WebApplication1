@@ -118,9 +118,7 @@ namespace lobby
 
             else
             {
-                //Thread t1 = new Thread(new ThreadStart(test));
-                //t1.Start();
-                //t1.Join();
+                //this will be if your the second user in room than on page call
                 ThreadStart childthreat = new ThreadStart(childthreadcall);
                 Response.Write("Child Thread Started <br/>");
                 Thread child = new Thread(childthreat);
@@ -163,26 +161,25 @@ namespace lobby
 
 
         }
-
+        //called with thread while waiting on send
         public void childthreadcall()
         {
             int flag = 1;
             while (flag == 1)
             {
+                var temp = Session["roomnumber"];
 
-                //remove this on completion of first page
-                HttpContext.Current.Session["roomnumber"] = "1";
-
-
-                var temp = HttpContext.Current.Session["roomnumber"];
+               
                 if (temp == "1")
                 {
-                    // if (list1.Count != 0)
-                    //  {
-                    //
-                    //  }
-                }
+                    var code = Application["Application_list1"];
 
+                    if (code != "")
+                    {
+                        
+                        // call recieve code function here
+                    }
+                }
 
             }
         }
