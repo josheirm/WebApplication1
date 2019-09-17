@@ -103,7 +103,7 @@ namespace lobby
         protected void Session_Start(object sender, EventArgs e)
         {
 
-
+           
 
             //Label1.Text = "aa";// Application["randomnumber1"].ToString();
         }
@@ -128,10 +128,10 @@ namespace lobby
                 //waiting to receive
                 if ((temp1 == "0") && (temp2 == "yes"))
                 {
-                    //this will be if your the second user in room than on page call
-                    ThreadStart childthreat = new ThreadStart(childthreadcall);
+                    
+                    ThreadStart childthread = new ThreadStart(childthreadcall);
                     Response.Write("Child Thread Started <br/>");
-                    Thread child = new Thread(childthreat);
+                    Thread child = new Thread(childthread);
 
                     child.Start();
 
@@ -286,6 +286,7 @@ namespace lobby
 
         protected void Button9_Click(object sender, EventArgs e)
         {
+           
             var holder = Application["randomnumber1"];
             Label1.Text = holder.ToString();
             testfunction();
@@ -297,6 +298,7 @@ namespace lobby
             Button6.Enabled = false;
         }
         //////////////////////this is where user one starts - user 2 should be in while loop waiting for code
+        //put thread start and stop at end to wait for receiving
         public void SendMessage(string buttonpressed, ref List<OneChatRoom> list9a, ref List<OneChatRoom> list9b, ref List<OneChatRoom> list9c, ref List<OneChatRoom> list9d, ref List<OneChatRoom> list5e)
         {
 
@@ -373,6 +375,21 @@ namespace lobby
                 }
 
                 swapuser.SwapWhoseTurn();
+
+                ThreadStart childthread = new ThreadStart(childthreadcall);
+                Thread child = new Thread(childthread);
+
+                child.Start();
+                
+                Response.Write("Main sleeping  for 2 seconds.......<br/>");
+                Thread.Sleep(2000);
+                Response.Write("<br/>Main aborting child thread<br/>");
+
+                child.Abort();
+                
+                
+
+
             }
 
         }
@@ -577,6 +594,7 @@ namespace lobby
     
     //this is the start of the program by user number 1, user number 2 should be 
     //in while loop
+
     class MyClass2
     {
         public void SendMessage(string buttonpressed, ref List<OneChatRoom> list1, ref List<OneChatRoom> list2, ref List<OneChatRoom> list3, ref List<OneChatRoom> list4, ref List<OneChatRoom> list5)
