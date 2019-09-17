@@ -119,19 +119,28 @@ namespace lobby
 
             else
             {
-                //this will be if your the second user in room than on page call
-                ThreadStart childthreat = new ThreadStart(childthreadcall);
-                Response.Write("Child Thread Started <br/>");
-                Thread child = new Thread(childthreat);
 
-                child.Start();
+                var temp1 = Application["MyUserNumber"];
+                //////////////////////create this variable from previous page
+                //also start a thread after button for guess the number pressed
+                //and make a flag so that receive can't be called yet!
+                var temp2 = Application["ThisIsFirstPageLoad"];
+                //waiting to receive
+                if ((temp1 == "0") && (temp2 == "yes"))
+                {
+                    //this will be if your the second user in room than on page call
+                    ThreadStart childthreat = new ThreadStart(childthreadcall);
+                    Response.Write("Child Thread Started <br/>");
+                    Thread child = new Thread(childthreat);
 
-                Response.Write("Main sleeping  for 2 seconds.......<br/>");
-                Thread.Sleep(2000);
-                Response.Write("<br/>Main aborting child thread<br/>");
+                    child.Start();
 
-                child.Abort();
+                    Response.Write("Main sleeping  for 2 seconds.......<br/>");
+                    Thread.Sleep(2000);
+                    Response.Write("<br/>Main aborting child thread<br/>");
 
+                    child.Abort();
+                }
 
 
                 rand = new Random().Next(1, 5);
@@ -163,14 +172,16 @@ namespace lobby
 
 
         }
-        //called with thread while waiting on send
+        //called with thread while waiting on send - just room one for now
         public void childthreadcall()
         {
             int flag = 1;
             while (flag == 1)
             {
                 var temp = Session["roomnumber"];
-
+                ///////////////!!!!
+                ///change this!
+                temp = 1;
 
                 if (temp == "1")
                 {
@@ -195,6 +206,7 @@ namespace lobby
         //player one goes first
         protected void Button1_Click(object sender, EventArgs e)
         {
+
             Button6.Enabled = false;
 
             //this is the main hack!
@@ -376,7 +388,7 @@ namespace lobby
             {
 
                 ////////////for testing
-                string msg = "1";
+                string msg = buttontodisable;
                 OneChatRoom message = new OneChatRoom(msg, "0", "0");
                 list1.Add(message);
                 HttpContext.Current.Application["Application_list1"] = list1;
