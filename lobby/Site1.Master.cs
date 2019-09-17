@@ -63,7 +63,7 @@ namespace lobby
 
 
 
-
+        string[] holdsbuttonspressed = new string[] {"0","0","0","0","0" };
         ChangeUser swapuser = new ChangeUser();
         int counter = 0;
 
@@ -301,6 +301,32 @@ namespace lobby
         //put thread start and stop at end to wait for receiving
         public void SendMessage(string buttonpressed, ref List<OneChatRoom> list9a, ref List<OneChatRoom> list9b, ref List<OneChatRoom> list9c, ref List<OneChatRoom> list9d, ref List<OneChatRoom> list5e)
         {
+            //make an array that holds real state of buttons
+            //so restore after all buttons disabled after send
+            if (buttonpressed == "1")
+            {
+                holdsbuttonspressed[0] = "1";
+            }
+            else if (buttonpressed == "2")
+            {
+                holdsbuttonspressed[1] = "1";
+            }
+            else if (buttonpressed == "3")
+            {
+                holdsbuttonspressed[2] = "1";
+            }
+            else if (buttonpressed == "4")
+            {
+                holdsbuttonspressed[3] = "1";
+
+            }
+            else if (buttonpressed == "5")
+            {
+                holdsbuttonspressed[4] = "1";
+            }
+
+
+            
 
 
             if (HttpContext.Current.Session["MyUserNumber"] == HttpContext.Current.Application["whoseturnisit"])
@@ -391,6 +417,13 @@ namespace lobby
 
 
             }
+            //array at top holds real button states for renewal at end of receive
+            Button6.Enabled = false;
+            Button2.Enabled = false;
+            Button3.Enabled = false;
+            Button4.Enabled = false;
+            Button5.Enabled = false;
+
 
         }
         //////////////////////
@@ -468,10 +501,37 @@ namespace lobby
                 }
 
 
+                //renew save state
+                //holdsbuttonspressed[0]
 
+                
+                if(holdsbuttonspressed[0] != "1")
+                {
+                        //this is correct!
+                        Button6.Enabled = true;
+                }
+                if (holdsbuttonspressed[1] != "1")
+                {
+                    Button2.Enabled = true;
 
+                }
 
+                if (holdsbuttonspressed[2] != "1")
+                {
+                    Button3.Enabled = true;
+                }
 
+                if (holdsbuttonspressed[3] != "1")
+                {
+                    Button4.Enabled = true;
+                }
+                if (holdsbuttonspressed[4] != "1")
+                {
+                    Button5.Enabled = true;
+                }
+
+                //?
+                swapuser.SwapWhoseTurn();
                 // return;
 
             }
