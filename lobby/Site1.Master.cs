@@ -64,6 +64,7 @@ namespace lobby
 
 
 
+        ChangeUser swapuser = new ChangeUser();
         int counter = 0;
 
         int rand = 0;
@@ -132,6 +133,7 @@ namespace lobby
                 child.Abort();
 
 
+
                 rand = new Random().Next(1, 5);
                 Application["randomnumber1"] = rand.ToString();
 
@@ -169,15 +171,16 @@ namespace lobby
             {
                 var temp = Session["roomnumber"];
 
-               
+
                 if (temp == "1")
                 {
                     var code = Application["Application_list1"];
 
                     if (code != "")
                     {
-                        
+
                         // call recieve code function here
+                        Receive(code.ToString());
                     }
                 }
 
@@ -187,143 +190,272 @@ namespace lobby
 
 
 
-        //try
-        //{
-        //    //counter = counter + 1;
-        //    //string temp = counter.ToString();
-        //    //Label2.Text = temp;
-        //    //Label2.Text = "";
-        //    Thread.Sleep(2000);
-        //    Label2.Text = "<br />Child thread started <br/>";
-        //    Label2.Text += "Child Thread: Coiunting to 10";
-
-        //    for (int i = 0; i < 10; i++)
-        //    {
-        //        Thread.Sleep(500);
-        //        Label2.Text += "<br/> in Child thread </br>";
-        //    }
-
-        //    Label2.Text += "<br/> child thread finished";
-
-        //}
-        //catch (ThreadAbortException e)
-        //{
-
-        //    Label2.Text += "<br /> child thread - exception";
-
-        //}
-        //finally
-        //{
-        //   Label2.Text += "<br /> child thread - unable to catch the  exception";
-        //}
-        //}
 
 
         //player one goes first
         protected void Button1_Click(object sender, EventArgs e)
+        {
+            Button6.Enabled = false;
+
+            //this is the main hack!
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+            //whosturnisit is : 1
+
+
+            //this goes second - user one done
+
+            //receive code - user 1 goes first this is player 2
+
+        }
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+            Button2.Enabled = false;
+            var holder1 = Application["randomnumber1"].ToString();
+            if (holder1 == "2")
             {
-                Button6.Enabled = false;
 
-                //this is the main hack!
-                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-                //whosturnisit is : 1
-
-
-                //this goes second - user one done
-
-                //receive code - user 1 goes first this is player 2
-
-            }
-            protected void Button2_Click(object sender, EventArgs e)
-            {
-                Button2.Enabled = false;
-                var holder1 = Application["randomnumber1"].ToString();
-                if (holder1 == "2")
-                {
-
-                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "alert('You Win!'); ", true);
-
-                }
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "alert('You Win!'); ", true);
 
             }
 
-            protected void Button3_Click(object sender, EventArgs e)
-            {
-                Button3.Enabled = false;
-                var holder1 = Application["randomnumber1"].ToString();
-                if (holder1 == "3")
-                {
-
-                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "alert('You Win!'); ", true);
-
-                }
-
-            }
-
-            protected void Button4_Click(object sender, EventArgs e)
-            {
-                Button4.Enabled = false;
-                var holder1 = Application["randomnumber1"].ToString();
-                if (holder1 == "4")
-                {
-
-                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "alert('You Win!'); ", true);
-
-                }
-
-            }
-
-            protected void Button5_Click(object sender, EventArgs e)
-            {
-                Button5.Enabled = false;
-                var holder1 = Application["randomnumber1"];
-                if (holder1 == "5")
-                {
-
-                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "alert('You Win!'); ", true);
-
-                }
-
-            }
-            //player 2
-            protected void Button8_Click(object sender, EventArgs e)
-            {
-
-                Session["MyUserNumber"] = "0";
-            }
-            //player 1
-            protected void Button7_Click(object sender, EventArgs e)
-            {
-                Session["MyUserNumber"] = "1";
-
-            }
-
-            protected void Button9_Click(object sender, EventArgs e)
-            {
-                var holder = Application["randomnumber1"];
-                Label1.Text = holder.ToString();
-
-                string var = "0";
-
-                //MyClass MyClass1 = new MyClass();
-
-                //Application["Temp"] = "TestValue";
-                //SessionTest sessionTest = new SessionTest();
-                //sessionTest.GetSession(Application["Temp"].ToString());
-
-            }
         }
 
-        //namespace
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            Button3.Enabled = false;
+            var holder1 = Application["randomnumber1"].ToString();
+            if (holder1 == "3")
+            {
+
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "alert('You Win!'); ", true);
+
+            }
+
+        }
+
+        protected void Button4_Click(object sender, EventArgs e)
+        {
+            Button4.Enabled = false;
+            var holder1 = Application["randomnumber1"].ToString();
+            if (holder1 == "4")
+            {
+
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "alert('You Win!'); ", true);
+
+            }
+
+        }
+
+        protected void Button5_Click(object sender, EventArgs e)
+        {
+            Button5.Enabled = false;
+            var holder1 = Application["randomnumber1"];
+            if (holder1 == "5")
+            {
+
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "alert('You Win!'); ", true);
+
+            }
+
+        }
+        //player 2
+        protected void Button8_Click(object sender, EventArgs e)
+        {
+
+            Session["MyUserNumber"] = "0";
+        }
+        //player 1
+        protected void Button7_Click(object sender, EventArgs e)
+        {
+            Session["MyUserNumber"] = "1";
+
+        }
+
+        protected void Button9_Click(object sender, EventArgs e)
+        {
+            var holder = Application["randomnumber1"];
+            Label1.Text = holder.ToString();
+            testfunction();
+
+
+        }
+        public void testfunction()
+        {
+            Button6.Enabled = false;
+        }
+        //////////////////////this is where user one starts - user 2 should be in while loop waiting for code
+        public void SendMessage(string buttonpressed, ref List<OneChatRoom> list9a, ref List<OneChatRoom> list9b, ref List<OneChatRoom> list9c, ref List<OneChatRoom> list9d, ref List<OneChatRoom> list5e)
+        {
+
+
+            if (HttpContext.Current.Session["MyUserNumber"] == HttpContext.Current.Application["whoseturnisit"])
+            {
+
+                //do this in event handler on press of button for each event handler
+                //Button6.Enabled = false;
+
+
+                var holder1 = HttpContext.Current.Application["randomnumber1"];
+                //var holder2 = HttpContext.Current.Application["randomnumber1"];
+
+                //you won got right pick
+                if (holder1.ToString() == buttonpressed)
+                {
+
+                    Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "alert('You Win!'); ", true);
+                }
+
+
+                //wrong pick - send message with code to disable
+                else
+                {
+
+                    ///////////////////////////////////////////////////////////////////////
+                    //this, below, a function//////////////////////////////////////////////
+                    ///////////////////////////////////////////////////////////////////////
+                    string msg = holder1.ToString();
+                    OneChatRoom message = new OneChatRoom(msg, "0", "0");
+                    //list1.Add(msg1);
+
+
+                    //////////!!!!!!!!!!!!!!!!!!!!!TWO OF THESE!!!! forcing
+                    //variable set at previous screen
+                    var roomnumber = 1;
+
+
+                    //sends message
+                    switch (roomnumber)
+                    {
+                        case 1:
+                            list1.Add(message);
+                            HttpContext.Current.Application["Application_list1"] = list1;
+                            break;
+
+                        case 2:
+                            list2.Add(message);
+                            HttpContext.Current.Application["Application_list2"] = list2;
+                            break;
+                        case 3:
+                            list3.Add(message);
+                            HttpContext.Current.Application["Application_list3"] = list3;
+                            break;
+                        case 4:
+                            list4.Add(message);
+                            HttpContext.Current.Application["Application_list4"] = list4;
+                            break;
+                        case 5:
+                            list5.Add(message);
+                            HttpContext.Current.Application["Application_list5"] = list5;
+                            break;
+
+
+                        default:
+
+                            break;
+                    }
+
+
+
+
+                }
+
+                swapuser.SwapWhoseTurn();
+            }
+
+        }
+        //////////////////////
+
+        //at start user two is in while loop and when code received goes here
+        //public void Receive(ref int buttontodisable, ref List<OneChatRoom> list1, ref List<OneChatRoom> list2, ref List<OneChatRoom> list3, ref List<OneChatRoom> list4, ref List<OneChatRoom> list5)
+        public void Receive(string buttontodisable)
+        {
+
+
+            if (HttpContext.Current.Session["MyUserNumber"] != HttpContext.Current.Application["whoseturnisit"])
+            {
+
+                ////////////for testing
+                string msg = "1";
+                OneChatRoom message = new OneChatRoom(msg, "0", "0");
+                list1.Add(message);
+                HttpContext.Current.Application["Application_list1"] = list1;
+                //list1.Add(message);
+                list1 = (List<OneChatRoom>)HttpContext.Current.Application["Application_list1"];
+                //////////end testing
+
+
+                //TWO OF THESE!!!!! - determined by previous page - hack
+                var roomnumber = 1;
+
+                if (roomnumber == 1)
+                {
+
+                    //the code is the number of the button sent to disable
+                    var code = (List<OneChatRoom>)HttpContext.Current.Application["Application_list1"];
+                    list1.RemoveAt(0);
+                    //Session["thecode"] = code ;
+
+                    //to use after
+
+                    //held in an HttpContext.Current.Application variable
+                    HttpContext.Current.Application["Application_list1"] = list1;
+                    ////Button6.Enabled = false;
+
+
+
+                }
+                else if (roomnumber == 2)
+                {
+                    var code = (List<OneChatRoom>)HttpContext.Current.Application["Application_list2"];
+                    list2.RemoveAt(0);
+                    //Session["thecode"] = code;
+                    HttpContext.Current.Application["Application_list2"] = list2;
+                    ////Button2.Enabled = false;
+                }
+                else if (roomnumber == 3)
+                {
+                    var code = (List<OneChatRoom>)HttpContext.Current.Application["Application_list3"];
+                    list3.RemoveAt(0);
+                    //Session["thecode"] = code;
+                    HttpContext.Current.Application["Application_list3"] = list3;
+                    ////Button3.Enabled = false;
+                }
+                else if (roomnumber == 4)
+                {
+                    var code = (List<OneChatRoom>)HttpContext.Current.Application["Application_list4"];
+                    list4.RemoveAt(0);
+                    //Session["thecode"] = code;
+                    HttpContext.Current.Application["Application_list4"] = list4;
+                    ////Button4.Enabled = false;
+                }
+                else if (roomnumber == 5)
+                {
+                    var code = (List<OneChatRoom>)HttpContext.Current.Application["Application_list5"];
+                    list5.RemoveAt(0);
+                    //Session["thecode"] = code;
+                    HttpContext.Current.Application["Application_list5"] = list5;
+                    ////Button5.Enabled = false;
+                }
+
+
+
+
+
+
+                // return;
+
+            }
+
+            //namespace
+        }
     }
 
-
-
+}
 
     public class ChangeUser
     {
-        public void MyFunction()
+        public void SwapWhoseTurn()
         {
             //switch whose turn
             var temp = HttpContext.Current.Session["whoseturnisit"];
@@ -430,38 +562,29 @@ namespace lobby
 
 
     ////////////////////
-    ///
-
-    //send code
-    //player 1 goes first
-    //this is player one's first run through
-
-    //adter send message disable button from caller instead
-
+    
+    //this is the start of the program by user number 1, user number 2 should be 
+    //in while loop
     class MyClass2
     {
-        public void SendMessage(int buttonpressed, ref List<OneChatRoom> list1, ref List<OneChatRoom> list2, ref List<OneChatRoom> list3, ref List<OneChatRoom> list4, ref List<OneChatRoom> list5)
+        public void SendMessage(string buttonpressed, ref List<OneChatRoom> list1, ref List<OneChatRoom> list2, ref List<OneChatRoom> list3, ref List<OneChatRoom> list4, ref List<OneChatRoom> list5)
         {
 
             if (HttpContext.Current.Session["MyUserNumber"] == HttpContext.Current.Application["whoseturnisit"])
             {
 
-                ///////////////////////////////////////////////
-                //this here is send a message, above is receive
-                ///////////////////////////////////////////////
+                //do this in event handler on press of button for each event handler
+                //Button6.Enabled = false;
 
-                //this is button one, really - user chose button one 
 
-                ////Button6.Enabled = false;
                 var holder1 = HttpContext.Current.Application["randomnumber1"];
 
                 //you won got right pick
-                if (holder1.ToString() == "1")
+                if (holder1.ToString() == buttonpressed)
                 {
-                    //list1.Add(a);
-                    ////Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "alert('You Win!'); ", true);
-
-                }
+                    //Response.Write("You won!");
+                    //Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "alert('You Win!'); ", true);
+                  }
 
 
                 //wrong pick - send message with code to disable
