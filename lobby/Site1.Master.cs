@@ -329,8 +329,8 @@ namespace lobby
             
 
 
-            if (HttpContext.Current.Session["MyUserNumber"] == HttpContext.Current.Application["whoseturnisit"])
-            {
+           // if (HttpContext.Current.Session["MyUserNumber"] == HttpContext.Current.Application["whoseturnisit"])
+            //{old brace
 
                 //do this in event handler on press of button for each event handler
                 //Button6.Enabled = false;
@@ -347,7 +347,8 @@ namespace lobby
                 }
 
 
-                //wrong pick - send message with code to disable
+                //wrong pick - send message with code to while of thread, it will disable in the receive function 
+                //called by while routine
                 else
                 {
 
@@ -355,12 +356,13 @@ namespace lobby
                     //this, below, a function//////////////////////////////////////////////
                     ///////////////////////////////////////////////////////////////////////
                     string msg = holder1.ToString();
+                    //should be 1 - 5 is the message
                     OneChatRoom message = new OneChatRoom(msg, "0", "0");
                     //list1.Add(msg1);
 
 
                     //////////!!!!!!!!!!!!!!!!!!!!!TWO OF THESE!!!! forcing
-                    //variable set at previous screen
+                    //variable will be set at previous screen
                     var roomnumber = 1;
 
 
@@ -399,9 +401,18 @@ namespace lobby
 
 
                 }
+            //}old brace
+            //array at top holds real button states for renewal at end of receive
+            Button6.Enabled = false;
+            Button2.Enabled = false;
+            Button3.Enabled = false;
+            Button4.Enabled = false;
+            Button5.Enabled = false;
 
-                swapuser.SwapWhoseTurn();
 
+            swapuser.SwapWhoseTurn();
+
+                //this user now waits for a code to be sent back
                 ThreadStart childthread = new ThreadStart(childthreadcall);
                 Thread child = new Thread(childthread);
 
@@ -416,14 +427,7 @@ namespace lobby
                 
 
 
-            }
-            //array at top holds real button states for renewal at end of receive
-            Button6.Enabled = false;
-            Button2.Enabled = false;
-            Button3.Enabled = false;
-            Button4.Enabled = false;
-            Button5.Enabled = false;
-
+            
 
         }
         //////////////////////
@@ -434,8 +438,8 @@ namespace lobby
         {
 
 
-            if (HttpContext.Current.Session["MyUserNumber"] != HttpContext.Current.Application["whoseturnisit"])
-            {
+            //if (HttpContext.Current.Session["MyUserNumber"] != HttpContext.Current.Application["whoseturnisit"])
+            //{old brace
 
                 ////////////for testing
                 string msg = buttontodisable;
@@ -534,7 +538,7 @@ namespace lobby
                 swapuser.SwapWhoseTurn();
                 // return;
 
-            }
+            //}old brace
 
             //namespace
         }
