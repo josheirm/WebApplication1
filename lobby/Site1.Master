@@ -52,6 +52,9 @@
                          <asp:Button ID="Button8" runat="server" Text="You are Player 2" OnClick="Button8_Click" />
 
 
+                         <asp:Button ID="Button10" runat="server" OnClick="Button10_Click" Text="TEST BUTTON" />
+
+
                      </p>
                      <p>
                          
