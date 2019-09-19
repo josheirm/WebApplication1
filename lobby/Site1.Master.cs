@@ -98,13 +98,7 @@ namespace lobby
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //these are scoped in event here, event handlers
-            
-            //in global.asax now
-            //Application["ThisIsFirstPageLoad"] = "1";
-           
-            //in global.asax now
-            //Application["CommandWasReceived"] = "no";
+            //this is called when a control is used
             if (Page.IsPostBack)
             {
 
@@ -114,27 +108,35 @@ namespace lobby
 
             else
             {
-                
-               
-                
+                //second user  - so sets up recieving double while mechanism before sending
+                Application["whoseturnisit"] = "0";
 
+                //inital stuff that needs to be done
+                rand = new Random().Next(1, 5);
+                Application["randomnumber1"] = rand.ToString();
+                
+                
+                //in previous page
                 var temp1 = Application["MyUserNumber"];
                 
-                //////////////////////create this variable from previous page
+                //creates this variable from previous page
                 var temp2 = Application["ThisIsFirstPageLoad"];
-                
-
-               
-
-               
-
-                
-
-                //DOES THESE NEED TO BE TOSTRING()?!?!?
-                //this is the first time on this page, it is user 2
-                //other user will be sending 
-                if (temp2 == "1" && temp1 == "0")
+              
+                //this is right, don't forget to pick user on previous page (user 2 is zero value)
+                if (temp1 == "0" && temp2 == "1")
                 {
+
+                    //initial set not needed, lists are all empty (null)
+                    //Application["Application_list1"] = list1;
+                    //Application["Application_list2"] = list2;
+                    //Application["Application_list3"] = list3;
+                    //Application["Application_list4"] = list4;
+                    //Application["Application_list5"] = list5;
+
+
+                    
+
+                    //this needs to be considered, page reloaded, what happen anyways?
                     Application["ThisIsFirstPageLoad"] = "2";
 
                     ThreadStart childthread = new ThreadStart(childthreadcall);
@@ -146,42 +148,24 @@ namespace lobby
                     var temp3a = Application["WaitingForCOde"];
 
                     //affectivly frozen here
-                    //initial user two is in here, waiting on a thread until sent message is received
-                    //!!!!received called and than users are switched and than user leaves thread waiting loop!!!!
-                    //and was swapped, so receiver is now sender
+                    //initial user two is in here, waiting on a thread until sender sends a message that is received
+                    //when receiver while gets code than reciever may coninue 
+                    //as sender finishes and becomes reciever and waits
+                    //reciever has become sender
 
                     //double loop mechanism to create a way to wait for command
+                    //waits in here still as thread runs until gets command
                     while (temp3a != "yes")
                     {
                         temp3a = Application["WaitingForCode"];
-                        Thread.Sleep(2000);
+                        //Thread.Sleep(2000);
                     }
-                        
+                    //so receive internal while changes to not using while loop so this user can  
+                    //Thread.Sleep(2000);    
                     //abort thread because command received by receiver
                     child.Abort();
-                }
-
-                
-
-                rand = new Random().Next(1, 5);
-                Application["randomnumber1"] = rand.ToString();
-
-                //put in global and set in previous page
-                Session["MyUserNumber"] = "1";
-
-                //player one goes first
-
-
-                //initial set
-                Application["Application_list1"] = list1;
-                Application["Application_list2"] = list2;
-                Application["Application_list3"] = list3;
-                Application["Application_list4"] = list4;
-                Application["Application_list5"] = list5;
-
-                Application["user1done"] = "1";
-                Application["user2done"] = "0";
-                Application["whoseturnisit"] = "1";
+                }              
+               
 
             }
 
@@ -195,35 +179,36 @@ namespace lobby
            
 
             int flag = 1;
+
+            //set at one for now
+            var temp = Session["roomnumber"];
+            ///////////////!!!!
             while (flag == 1)
             {
-                //make sure receive is ready when send is allowed
-                Application["WaitingForCode"] = "yes";
-                //set at one for now
-                var temp = Session["roomnumber"];
-                ///////////////!!!!
+                
+                
                 ///change this!
                 temp = 1;
 
+                
                 //create all the other 4 rooms,when read...
                 if (temp == "1")
                 {
                     var code = Application["Application_list1"];
 
+                    
+                    Application["WaitingForCode"] = "yes";
                     //has recieved senders code, sender is now recieiver
                     if (code != "")
                     {
-
-                       
                         //leaving while loop that get's code so code is done recieving in the while
                         Application["WaitingForCode"] = "no";
-                        // call recieve code function here
+                        // call recieve code function here and changes receiver to sender
                         Receive(code.ToString());
                         //recieved here so receivers can abort thread
                        
 
-                       //has been swapped, reciever now sender
-                       Application["CommandWasReceived"] = "yes";
+                       
 
                     }
                 }
@@ -327,20 +312,29 @@ namespace lobby
            
             var holder = Application["randomnumber1"];
             Label1.Text = holder.ToString();
-           // testfunction();
+            testfunction();
 
 
         }
         public void testfunction()
         {
+            var temp = Application["ThisIsFirstPageLoad"];
+            string check = temp.ToString();
+            //Application["ThisIsFirstPageLoad"] = "1";
             Button6.Enabled = false;
+
         }
         //////////////////////this is where user one starts - user 2 should be in while loop waiting for code
         //put thread start and stop at end to wait for receiving
         public void SendMessage(string buttonpressed)//, ref List<OneChatRoom> list9a, ref List<OneChatRoom> list9b, ref List<OneChatRoom> list9c, ref List<OneChatRoom> list9d, ref List<OneChatRoom> list5e)
         {
-            //code is recieved to be received so send 
-            if(Application["WaitingForReceiver"] ==  "yes")
+            
+
+            //this is sender, the sends code and reciever ends first (sleeps in sender)
+            //than sender changes who will run sender next by pressing buttons and ends
+
+            //reciever has disabled keys sender so can't not
+            if(Application["whoseturnisit"] == Session["MyUserNumber"])
             { 
 
 
@@ -370,13 +364,19 @@ namespace lobby
             }
 
 
+                //set for being new receiver
+                Button6.Enabled = false;
+                Button2.Enabled = false;
+                Button3.Enabled = false;
+                Button4.Enabled = false;
+                Button5.Enabled = false;
 
 
 
 
 
 
-            var holder1 = HttpContext.Current.Application["randomnumber1"];
+                var holder1 = HttpContext.Current.Application["randomnumber1"];
 
 
             //you won got right pick
@@ -392,6 +392,7 @@ namespace lobby
             else
             {
 
+                
                 ///////////////////////////////////////////////////////////////////////
                 //this, below, a function//////////////////////////////////////////////
                 ///////////////////////////////////////////////////////////////////////
@@ -441,166 +442,161 @@ namespace lobby
 
 
             }
-            //}old brace
-            //array at top holds real button states for renewal at end of receive
-            Button6.Enabled = false;
-            Button2.Enabled = false;
-            Button3.Enabled = false;
-            Button4.Enabled = false;
-            Button5.Enabled = false;
+            //used until asych tasks with await used.
+            //paused to make sure reciver is done first
+            //and also this code here uses swap so buttons are pressable only by this sender when a new user
+            Thread.Sleep(3000);
 
-            //after this is not sender, is becoming reciever
-            swapuser.SwapWhoseTurn();
+               
 
-            //this user now waits for a code to be sent back
-            ThreadStart childthread = new ThreadStart(childthreadcall);
-            Thread child = new Thread(childthread);
 
-            //is receiver, so waits here until recieved message, when receive function done 
-            //and changes to sender, this sender has swapped and becomes reciever waiting for 
-            //message to be sent with button press.
-            child.Start();
-            
-                
-            //sending messager is now reciever  stays here until code received
-            //double loop mechanism
-            var temp3b = Application["WaitingForCode"]; 
+                //after this this is not sender, is becoming reciever
+                //reciever already finished
+                //this user will be in the receive
+                //reciever will send
+                swapuser.SwapWhoseTurn();
+
+                //this user now waits for a code to be sent back
+                ThreadStart childthread = new ThreadStart(childthreadcall);
+                Thread child = new Thread(childthread);
+
+                //this function has a pause so that reciever is done first, 
+                //so we can use Application["WaitingForCode"]; 
+
+
+                //this is the receiver thread, so waits there until recieved message by the new sender, when receive function done 
+                //and changes to sender, this sender has swapped and becomes reciever waiting for 
+                //message to be sent with button press.
+
+                //sender creates a reciever thread that calls the recieve function
+                // this thread will be added to by next sender which will finish last again after reciever 
+              
+                child.Start();
+
+             //double loop mechanism - creates a 2nd thread again
+             //makes sender the reciever
+             //this user is now the receiver called by internals
+             //the other user will run this send routine
+             var temp3b = Application["WaitingForCode"]; 
             while (temp3b != "yes")
             {
                 temp3b = Application["WaitingForCode"]; 
-                Thread.Sleep(2000);
+                //Thread.Sleep(2000);
             }
+                Application["WaitingForCode"] = "no";
 
             /////////////
 
             child.Abort();
 
+            
 
 
-
-        }    
+            }    
         //end send message
         }
         //////////////////////
 
         //at start user two is in while loop and when code received goes here
         //public void Receive(ref int buttontodisable, ref List<OneChatRoom> list1, ref List<OneChatRoom> list2, ref List<OneChatRoom> list3, ref List<OneChatRoom> list4, ref List<OneChatRoom> list5)
+
+        //called from recievers internal while when a message that can than be read is read
         public void Receive(string buttontodisable)
         {
 
 
-            //if (HttpContext.Current.Session["MyUserNumber"] != HttpContext.Current.Application["whoseturnisit"])
-            //{old brace
+            ////////////for testing - sends a message (code)/////////
 
-                ////////////for testing
-                //string msg = buttontodisable;
-                //OneChatRoom message = new OneChatRoom(msg, "0", "0");
-                //list1.Add(message);
-                //HttpContext.Current.Application["Application_list1"] = list1;
-                ////list1.Add(message);
-                //list1 = (List<OneChatRoom>)HttpContext.Current.Application["Application_list1"];
-                ////////////end testing
+            //string msg = buttontodisable;
+            //OneChatRoom message = new OneChatRoom(msg, "0", "0");
+            //list1.Add(message);
+            //HttpContext.Current.Application["Application_list1"] = list1;
+            ////list1.Add(message);
+            //list1 = (List<OneChatRoom>)HttpContext.Current.Application["Application_list1"];
+
+            ////////////end testing
+
+            //renew save state 
+            if (holdsbuttonspressed[0] != "1")
+            {
+                //this is correct!
+                Button6.Enabled = true;
+            }
+            if (holdsbuttonspressed[1] != "1")
+            {
+                Button2.Enabled = true;
+
+            }
+
+            if (holdsbuttonspressed[2] != "1")
+            {
+                Button3.Enabled = true;
+            }
+
+            if (holdsbuttonspressed[3] != "1")
+            {
+                Button4.Enabled = true;
+            }
+            if (holdsbuttonspressed[4] != "1")
+            {
+                Button5.Enabled = true;
+            }
 
 
-                //TWO OF THESE!!!!! - determined by previous page - hack
-                var roomnumber = 1;
+            //TWO OF THESE!!!!! - determined by previous page - hack
+            var roomnumber = 1;
 
                 if (roomnumber == 1)
                 {
 
                     //the code is the number of the button sent to disable
-                    //var code = (List<OneChatRoom>)HttpContext.Current.Application["Application_list1"];
+                    //removes code as it is now received
                     list1.RemoveAt(0);
-                    //Session["thecode"] = code ;
-
-                    //to use after
-
-                    //held in an HttpContext.Current.Application variable
+                    
+                    //kept current
                     HttpContext.Current.Application["Application_list1"] = list1;
-                    ////Button6.Enabled = false;
-
+                    
 
 
                 }
                 else if (roomnumber == 2)
                 {
-                    //var code = (List<OneChatRoom>)HttpContext.Current.Application["Application_list2"];
+                    
                     list2.RemoveAt(0);
-                    //Session["thecode"] = code;
+                    
                     HttpContext.Current.Application["Application_list2"] = list2;
-                    ////Button2.Enabled = false;
+                    
                 }
                 else if (roomnumber == 3)
                 {
-                    //var code = (List<OneChatRoom>)HttpContext.Current.Application["Application_list3"];
+                    
                     list3.RemoveAt(0);
-                    //Session["thecode"] = code;
+                    
                     HttpContext.Current.Application["Application_list3"] = list3;
-                    ////Button3.Enabled = false;
+                    
                 }
                 else if (roomnumber == 4)
                 {
-                    //var code = (List<OneChatRoom>)HttpContext.Current.Application["Application_list4"];
-                    list4.RemoveAt(0);
-                    //Session["thecode"] = code;
+                   list4.RemoveAt(0);
+                   
                     HttpContext.Current.Application["Application_list4"] = list4;
-                    ////Button4.Enabled = false;
+                    
                 }
                 else if (roomnumber == 5)
                 {
-                    //var code = (List<OneChatRoom>)HttpContext.Current.Application["Application_list5"];
-                    list5.RemoveAt(0);
-                    //Session["thecode"] = code;
+                     list5.RemoveAt(0);
+                    
                     HttpContext.Current.Application["Application_list5"] = list5;
-                    ////Button5.Enabled = false;
+                   
                 }
-
-
-                //renew save state
-                //holdsbuttonspressed[0]
-
-                
-                if(holdsbuttonspressed[0] != "1")
-                {
-                        //this is correct!
-                        Button6.Enabled = true;
-                }
-                if (holdsbuttonspressed[1] != "1")
-                {
-                    Button2.Enabled = true;
-
-                }
-
-                if (holdsbuttonspressed[2] != "1")
-                {
-                    Button3.Enabled = true;
-                }
-
-                if (holdsbuttonspressed[3] != "1")
-                {
-                    Button4.Enabled = true;
-                }
-                if (holdsbuttonspressed[4] != "1")
-                {
-                    Button5.Enabled = true;
-                }
-
-                //?
-                swapuser.SwapWhoseTurn();
-
-                //child.Abort();
-                // return;
-
-            //}old brace
-
-            //namespace
+               
+        //namespace
         }
 
         protected void Button10_Click(object sender, EventArgs e)
         {
             SendMessage("1");
-           // Receive("1");
-            
+           
 
         }
     }

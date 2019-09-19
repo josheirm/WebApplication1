@@ -12,6 +12,8 @@ namespace lobby
 
         protected void Application_Start(object sender, EventArgs e)
         {
+            //user num 1 is 1, user num 0 is two
+            Application["MyUserNumber"] = 0;
             Application["ThisIsFirstPageLoad"] = "1";
            //waits for recive while to start for sender to send to
             Application["WaitingForCode"] = "no";
