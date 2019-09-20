@@ -16,13 +16,13 @@ namespace lobby
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            Application["MyUserNumber"] = 1;
+            Session["MyUserNumber"] = "1";
 
         }
 
         protected void Button2_Click(object sender, EventArgs e)
         {
-            Application["MyUserNumber"] = 0;
+            Session["MyUserNumber"] = "0";
 
         }
     }

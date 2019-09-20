@@ -58,7 +58,7 @@
                      </p>
                      <p>
                          
-                         <asp:Label ID="Label2" runat="server" Text="Label2"></asp:Label>
+                         <asp:Label ID="Label2" runat="server" Text="Player One's Turn"></asp:Label>
 
 
                      </p>

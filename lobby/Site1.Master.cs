@@ -56,18 +56,13 @@ namespace lobby
 {
     public partial class Site1 : System.Web.UI.MasterPage
     {
-
-
-
-        //string b = a;
-
-
-         
+        //FIX THIS!!!
+        string rand2 = "0";
         string[] holdsbuttonspressed = new string[] {"0","0","0","0","0" };
         ChangeUser swapuser = new ChangeUser();
         int counter = 0;
 
-        int rand = 0;
+        //int rand = 0;
         List<OneChatRoom> list1 = new List<OneChatRoom>();
 
         List<OneChatRoom> list2 = new List<OneChatRoom>();
@@ -96,7 +91,7 @@ namespace lobby
             
         }
 
-        protected void Page_Load(object sender, EventArgs e)
+        protected string Page_Load(object sender, EventArgs e)
         {
             //this is called when a control is used
             if (Page.IsPostBack)
@@ -108,16 +103,9 @@ namespace lobby
 
             else
             {
-                //second user  - so sets up recieving double while mechanism before sending
-                Application["whoseturnisit"] = "0";
-
-                //inital stuff that needs to be done
-                rand = new Random().Next(1, 5);
-                Application["randomnumber1"] = rand.ToString();
-                
-                
-                //in previous page
-                var temp1 = Application["MyUserNumber"];
+       
+                //in previous page   - whose using current send
+                var temp1 = Session["MyUserNumber"];
                 
                 //creates this variable from previous page
                 var temp2 = Application["ThisIsFirstPageLoad"];
@@ -125,6 +113,11 @@ namespace lobby
                 //this is right, don't forget to pick user on previous page (user 2 is zero value)
                 if (temp1 == "0" && temp2 == "1")
                 {
+                    Button6.Enabled = true;
+                    Button2.Enabled = true;
+                    Button3.Enabled = false;
+                    Button4.Enabled = false;
+                    Button5.Enabled = false;
 
                     //initial set not needed, lists are all empty (null)
                     //Application["Application_list1"] = list1;
@@ -134,7 +127,7 @@ namespace lobby
                     //Application["Application_list5"] = list5;
 
 
-                    
+
 
                     //this needs to be considered, page reloaded, what happen anyways?
                     Application["ThisIsFirstPageLoad"] = "2";
@@ -170,13 +163,17 @@ namespace lobby
             }
 
 
-            
 
+            return ("B");
         }
         //called with thread while waiting on send - just room one for now
         public void childthreadcall()
         {
-           
+            Button6.Enabled = true;
+            Button2.Enabled = true;
+            Button3.Enabled = true;
+            Button4.Enabled = true;
+            Button5.Enabled = false;
 
             int flag = 1;
 
@@ -187,7 +184,7 @@ namespace lobby
             {
                 
                 
-                ///change this!
+                ///CHANGE THIS!
                 temp = 1;
 
                 
@@ -201,14 +198,15 @@ namespace lobby
                     //has recieved senders code, sender is now recieiver
                     if (code != "")
                     {
-                        //leaving while loop that get's code so code is done recieving in the while
-                        Application["WaitingForCode"] = "no";
+                        
                         // call recieve code function here and changes receiver to sender
                         Receive(code.ToString());
+                        
                         //recieved here so receivers can abort thread
-                       
+                        //leaving while loop that get's code so code is done recieving in the while
+                        Application["WaitingForCode"] = "no";
 
-                       
+
 
                     }
                 }
@@ -217,82 +215,109 @@ namespace lobby
         }
 
 
-
-
-
+        
+        
+       
 
         //player one goes first
         protected void Button1_Click(object sender, EventArgs e)
         {
             
-            //was test
-            //var variable = Application["ThisIsFirstPageLoad"];
+            
 
-            //string thisstring = variable.ToString();
+            //Button6.Enabled = false;
+             //rand2 = new Random().Next(1, 5);
+            if (rand2 == "1")
 
+            {
+                Application["randomnumber1"] = rand2;
+                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "alert('You Win!'); ", true);
+
+            }
             Button6.Enabled = false;
-
-            //this is the main hack!
-            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-            //whosturnisit is : 1
-
-
-            //this goes second - user one done
-
-            //receive code - user 1 goes first this is player 2
+            Button2.Enabled = false;
+            Button3.Enabled = false;
+            Button4.Enabled = false;
+            Button5.Enabled = false;
+            SendMessage("1");
+            
 
         }
         protected void Button2_Click(object sender, EventArgs e)
         {
-            Button2.Enabled = false;
-            var holder1 = Application["randomnumber1"].ToString();
-            if (holder1 == "2")
+
+            //Button2.Enabled = false;
+             //rand2 = new Random().Next(1, 5);
+            if (rand2 == "2")
+
             {
+                Application["randomnumber1"] = rand2;
 
                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "alert('You Win!'); ", true);
 
             }
-
+            Button6.Enabled = false;
+            Button2.Enabled = false;
+            Button3.Enabled = false;
+            Button4.Enabled = false;
+            Button5.Enabled = false;
+            SendMessage("2");
         }
 
         protected void Button3_Click(object sender, EventArgs e)
         {
-            Button3.Enabled = false;
-            var holder1 = Application["randomnumber1"].ToString();
-            if (holder1 == "3")
-            {
+            //Button3.Enabled = false;
+             //rand2 = new Random().Next(1, 5);
+            if (rand2 == "3")
 
+            {
+                Application["randomnumber1"] = rand2;
                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "alert('You Win!'); ", true);
 
             }
-
+            Button6.Enabled = false;
+            Button2.Enabled = false;
+            Button3.Enabled = false;
+            Button4.Enabled = false;
+            Button5.Enabled = false;
+            SendMessage("3");
         }
 
         protected void Button4_Click(object sender, EventArgs e)
         {
-            Button4.Enabled = false;
-            var holder1 = Application["randomnumber1"].ToString();
-            if (holder1 == "4")
+            //Button4.Enabled = false;
+             //rand2 = new Random().Next(1, 5);
+            if (rand2 == "4")
+            
             {
-
+                Application["randomnumber1"] = rand2;
                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "alert('You Win!'); ", true);
 
             }
-
+            Button6.Enabled = false;
+            Button2.Enabled = false;
+            Button3.Enabled = false;
+            Button4.Enabled = false;
+            Button5.Enabled = false;
+            SendMessage("4");
         }
 
         protected void Button5_Click(object sender, EventArgs e)
         {
-            Button5.Enabled = false;
-            var holder1 = Application["randomnumber1"];
-            if (holder1 == "5")
+            
+            if (rand2 == "5")
             {
-
+                Application["randomnumber1"] = rand2;
                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "alert('You Win!'); ", true);
 
             }
-
+            Button6.Enabled = false;
+            Button2.Enabled = false;
+            Button3.Enabled = false;
+            Button4.Enabled = false;
+            Button5.Enabled = false;
+            string a = SendMessage("test");
+           
         }
         //player 2
         protected void Button8_Click(object sender, EventArgs e)
@@ -310,101 +335,74 @@ namespace lobby
         protected void Button9_Click(object sender, EventArgs e)
         {
            
-            var holder = Application["randomnumber1"];
-            Label1.Text = holder.ToString();
+            
             testfunction();
 
 
         }
         public void testfunction()
         {
-            var temp = Application["ThisIsFirstPageLoad"];
-            string check = temp.ToString();
-            //Application["ThisIsFirstPageLoad"] = "1";
+            
             Button6.Enabled = false;
 
         }
+        //this is the new event handler to handle everything
+        protected void SomeButton_Click(object sender, EventArgs e)
+        {
+            var a = 1;
+            Label2.Text = "testing this...";
+        }
         //////////////////////this is where user one starts - user 2 should be in while loop waiting for code
         //put thread start and stop at end to wait for receiving
-        public void SendMessage(string buttonpressed)//, ref List<OneChatRoom> list9a, ref List<OneChatRoom> list9b, ref List<OneChatRoom> list9c, ref List<OneChatRoom> list9d, ref List<OneChatRoom> list5e)
+        public string SendMessage(string buttonpressed)//, ref List<OneChatRoom> list9a, ref List<OneChatRoom> list9b, ref List<OneChatRoom> list9c, ref List<OneChatRoom> list9d, ref List<OneChatRoom> list5e)
         {
+
             
-
-            //this is sender, the sends code and reciever ends first (sleeps in sender)
-            //than sender changes who will run sender next by pressing buttons and ends
-
-            //reciever has disabled keys sender so can't not
-            if(Application["whoseturnisit"] == Session["MyUserNumber"])
-            { 
-
-
-
-            //make an array that holds real state of buttons
-            //so restore after all buttons disabled after send
-            if (buttonpressed == "1")
+            if (Application["whoseturnisit"] != Session["MyUserNumber"])
             {
-                holdsbuttonspressed[0] = "1";
-            }
-            else if (buttonpressed == "2")
-            {
-                holdsbuttonspressed[1] = "1";
-            }
-            else if (buttonpressed == "3")
-            {
-                holdsbuttonspressed[2] = "1";
-            }
-            else if (buttonpressed == "4")
-            {
-                holdsbuttonspressed[3] = "1";
+                
+                ////make an array that holds real state of buttons
+                ////so restore after all buttons disabled after send
+                if (buttonpressed == "1")
+                {
+                    holdsbuttonspressed[0] = "1";
+                }
+                else if (buttonpressed == "2")
+                {
+                    holdsbuttonspressed[1] = "1";
+                }
+                else if (buttonpressed == "3")
+                {
+                    holdsbuttonspressed[2] = "1";
+                }
+                else if (buttonpressed == "4")
+                {
+                    holdsbuttonspressed[3] = "1";
 
-            }
-            else if (buttonpressed == "5")
-            {
-                holdsbuttonspressed[4] = "1";
-            }
-
-
-                //set for being new receiver
-                Button6.Enabled = false;
-                Button2.Enabled = false;
-                Button3.Enabled = false;
-                Button4.Enabled = false;
-                Button5.Enabled = false;
+                }
+                else if (buttonpressed == "5")
+                {
+                    holdsbuttonspressed[4] = "1";
+                }
 
 
 
-
-
-
-                var holder1 = HttpContext.Current.Application["randomnumber1"];
-
-
-            //you won got right pick
-            if (holder1.ToString() == buttonpressed)
-            {
-
-                Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "alert('You Win!'); ", true);
-            }
-
-
-            //wrong pick - send message with code to while of thread, it will disable in the receive function 
-            //called by while routine
+            //wrong pick - send message with code to while of thread,
             else
             {
 
-                
-                ///////////////////////////////////////////////////////////////////////
-                //this, below, a function//////////////////////////////////////////////
-                ///////////////////////////////////////////////////////////////////////
-                string msg = holder1.ToString();
+
+                    
+                    
+                string msg = rand2.ToString();
                 //should be 1 - 5 is the message
                 OneChatRoom message = new OneChatRoom(msg, "0", "0");
-                //list1.Add(msg1);
+                
 
 
                 //////////!!!!!!!!!!!!!!!!!!!!!TWO OF THESE!!!! forcing
                 //variable will be set at previous screen
-                var roomnumber = 1;
+                int roomnumber = 1;
 
 
                 //sends message
@@ -442,18 +440,17 @@ namespace lobby
 
 
             }
-            //used until asych tasks with await used.
-            //paused to make sure reciver is done first
-            //and also this code here uses swap so buttons are pressable only by this sender when a new user
-            Thread.Sleep(3000);
-
+                //used until asych tasks with await used.
+                //paused to make sure reciver is done first
+                
+                Thread.Sleep(2000);
                
 
 
                 //after this this is not sender, is becoming reciever
                 //reciever already finished
-                //this user will be in the receive
-                //reciever will send
+                //this user will be use the receive
+                //reciever will be sender
                 swapuser.SwapWhoseTurn();
 
                 //this user now waits for a code to be sent back
@@ -489,20 +486,33 @@ namespace lobby
 
             child.Abort();
 
-            
 
 
-            }    
-        //end send message
+                
+                //end send message
+            }
+
+            return ("A");
+
         }
         //////////////////////
 
         //at start user two is in while loop and when code received goes here
         //public void Receive(ref int buttontodisable, ref List<OneChatRoom> list1, ref List<OneChatRoom> list2, ref List<OneChatRoom> list3, ref List<OneChatRoom> list4, ref List<OneChatRoom> list5)
 
-        //called from recievers internal while when a message that can than be read is read
+        //called from recievers internal 
         public void Receive(string buttontodisable)
         {
+
+            SomeButton_Click(new object(), new EventArgs());
+            
+            //this wont work here, use the new event handler
+            //set for being new receiver
+            //Button6.Enabled = true;
+            //Button2.Enabled = false;
+            //Button3.Enabled = false;
+            //Button4.Enabled = false;
+            //Button5.Enabled = false;
 
 
             ////////////for testing - sends a message (code)/////////
@@ -517,30 +527,6 @@ namespace lobby
             ////////////end testing
 
             //renew save state 
-            if (holdsbuttonspressed[0] != "1")
-            {
-                //this is correct!
-                Button6.Enabled = true;
-            }
-            if (holdsbuttonspressed[1] != "1")
-            {
-                Button2.Enabled = true;
-
-            }
-
-            if (holdsbuttonspressed[2] != "1")
-            {
-                Button3.Enabled = true;
-            }
-
-            if (holdsbuttonspressed[3] != "1")
-            {
-                Button4.Enabled = true;
-            }
-            if (holdsbuttonspressed[4] != "1")
-            {
-                Button5.Enabled = true;
-            }
 
 
             //TWO OF THESE!!!!! - determined by previous page - hack
@@ -549,8 +535,7 @@ namespace lobby
                 if (roomnumber == 1)
                 {
 
-                    //the code is the number of the button sent to disable
-                    //removes code as it is now received
+                    
                     list1.RemoveAt(0);
                     
                     //kept current
@@ -589,8 +574,34 @@ namespace lobby
                     HttpContext.Current.Application["Application_list5"] = list5;
                    
                 }
-               
-        //namespace
+
+            if (holdsbuttonspressed[0] != "1")
+            {
+                //this is correct!
+                Button6.Enabled = true;
+            }
+            if (holdsbuttonspressed[1] != "1")
+            {
+                Button2.Enabled = true;
+
+            }
+
+            if (holdsbuttonspressed[2] != "1")
+            {
+                Button3.Enabled = true;
+            }
+
+            if (holdsbuttonspressed[3] != "1")
+            {
+                Button4.Enabled = true;
+            }
+            if (holdsbuttonspressed[4] != "1")
+            {
+                Button5.Enabled = true;
+            }
+
+            swapuser.SwapWhoseTurn();
+            //namespace
         }
 
         protected void Button10_Click(object sender, EventArgs e)

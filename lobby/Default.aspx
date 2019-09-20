@@ -13,7 +13,7 @@
             <asp:Button ID="Button2" runat="server" Text="User2" OnClick="Button2_Click" />
             <br />
             <br />
-            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Default1.aspx">HyperLink</asp:HyperLink>
+            <asp:HyperLink ID="HyperLink1" runat="server" text = "next screen" NavigateUrl="~/Default1.aspx"></asp:HyperLink>
         </div>
     </form>
 </body>
