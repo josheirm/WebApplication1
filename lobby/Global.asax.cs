@@ -19,12 +19,15 @@ namespace lobby
             //user 1 will be running send message first
             //first user  - so sets up recieving double while mechanism before sending
             Application["whoseturnisit"] = "1";
+           
+
         }
 
         protected void Session_Start(object sender, EventArgs e)
         {
             //user num 1 is 1, user num 0 is two
             Session["MyUserNumber"] = "0";
+
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
