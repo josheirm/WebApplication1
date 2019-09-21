@@ -19,7 +19,7 @@ namespace lobby
             //user 1 will be running send message first
             //first user  - so sets up recieving double while mechanism before sending
             Application["whoseturnisit"] = "1";
-           
+            Application["ThisIsFirstPageLoad"] = "1";
 
         }
 
