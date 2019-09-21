@@ -76,7 +76,7 @@ namespace WebApplication2
 
             Application["test2"] = list2;
             list2 = (List<OneChatRoom>)Application["test2"];
-            //ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + list2[0].Personis + list2[1].Personis + list2[2].Personis + "');", true);
+            ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + list2[0].Personis + list2[1].Personis + list2[2].Personis + "');", true);
             Session[var] = "1";
             string temp = Session["test"].ToString();
 
