@@ -214,6 +214,7 @@ namespace lobby
             string code2 = "";
             //Response.Write("made it <br>");
 
+            //Receive(code2); 
             //string flag = "1";
             while (flag == "1")
             {
