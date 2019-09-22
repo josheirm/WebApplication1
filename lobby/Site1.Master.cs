@@ -207,7 +207,7 @@ namespace lobby
             string flag = "1";
 
             //set at one for now
-            var temp = Session["roomnumber"];
+            //var temp = Session["roomnumber"];
             ///////////////!!!!
 
             var code = Application["Application_list1"];
@@ -216,6 +216,101 @@ namespace lobby
 
             //Receive(code2); 
             //string flag = "1";
+            /////////////////////////////////////////////////////////
+            //{
+                Response.Write("in recieve function<br>");
+                //return ("S");
+
+
+
+                ////////////for testing - sends a message (code)/////////
+
+                //string msg = buttontodisable;
+                //OneChatRoom message = new OneChatRoom(msg, "0", "0");
+                //list1.Add(message);
+                //HttpContext.Current.Application["Application_list1"] = list1;
+                ////list1.Add(message);
+                //list1 = (List<OneChatRoom>)HttpContext.Current.Application["Application_list1"];
+
+                ////////////end testing
+
+                //renew save state 
+
+
+                //TWO OF THESE!!!!! - determined by previous page - hack
+                string roomnumber = "1";
+
+            if (roomnumber == "1")
+            {
+
+
+                list1.RemoveAt(0);
+
+                //kept current
+                Application["Application_list1"] = list1;
+
+
+
+            }
+            //else if (roomnumber == "2")
+            //{
+
+            //    list2.RemoveAt(0);
+
+            //    Application["Application_list2"] = list2;
+
+            //}
+            //else if (roomnumber == "3")
+            //{
+
+            //    list3.RemoveAt(0);
+
+            //    Application["Application_list3"] = list3;
+
+            //}
+            //else if (roomnumber == "4")
+            //{
+            //    list4.RemoveAt(0);
+
+            //    Application["Application_list4"] = list4;
+
+            //}
+            //else if (roomnumber == "5")
+            //{
+            //    list5.RemoveAt(0);
+
+            //   Application["Application_list5"] = list5;
+
+            //}
+            //Response.Write("receive fundtion - enable buttons <br>");
+            ////enable buttons
+            //SomeButton_Click(new object(), new EventArgs());
+
+            //Response.Write("recieve function - sleep<br>");
+            ////Thread.Sleep(2000);
+
+            Response.Write("recieve function - swap<br>");
+            // swapuser.SwapWhoseTurn();
+
+            ////////////////////////////////
+            ///
+
+            var temp = Application["whoseturnisit"];
+            string temp2 = temp.ToString();
+            if (temp2 == "1")
+            {
+                Application["whoseturnisit"] = "0";
+            }
+            else
+            {
+               Application["whoseturnisit"] = "1";
+            }
+            //return ("D");
+
+            ////////////////////
+
+
+            /////////////////////////////////////////////////////////
             while (flag == "1")
             {
                 Application["WaitingForCode"] = "yes";
@@ -697,12 +792,13 @@ namespace lobby
 
     public class ChangeUser
     {
-        public void SwapWhoseTurn()
+        public string SwapWhoseTurn()
         {
         
         //switch whose turn
         var temp = HttpContext.Current.Session["whoseturnisit"];
-            if (temp == "1")
+        string temp2 = temp.ToString();
+            if (temp2 == "1")
             {
                 HttpContext.Current.Session["whoseturnisit"] = "0";
             }
@@ -710,7 +806,9 @@ namespace lobby
             {
                 HttpContext.Current.Session["whoseturnisit"] = "1";
             }
-        }
+        return ("D");
+
+    }
 
     }
 
