@@ -103,12 +103,12 @@ namespace lobby
 
             else
             {
-                string msg = "a";
-                OneChatRoom message = new OneChatRoom(msg, "0", "0");
-                list1.Add(message);
-                HttpContext.Current.Application["Application_list1"] = list1;
+                //string msg = "a";
+                //OneChatRoom message = new OneChatRoom(msg, "0", "0");
                 //list1.Add(message);
-                list1 = (List<OneChatRoom>)HttpContext.Current.Application["Application_list1"];
+                //HttpContext.Current.Application["Application_list1"] = list1;
+                ////list1.Add(message);
+                //list1 = (List<OneChatRoom>)HttpContext.Current.Application["Application_list1"];
 
                 Response.Write("in else<br>");
                 //Receive("1");
