@@ -309,7 +309,8 @@ namespace lobby
 
             ////////////////////
 
-
+            ////enable buttons
+            SomeButton_Click(new object(), new EventArgs());
             /////////////////////////////////////////////////////////
             while (flag == "1")
             {
@@ -504,7 +505,7 @@ namespace lobby
         {
 
             Button6.Enabled = false;
-            Button2.Enabled = true;
+            Button2.Enabled = false;
             Button3.Enabled = true;
             Button4.Enabled = true;
             Button5.Enabled = true;
@@ -796,15 +797,15 @@ namespace lobby
         {
         
         //switch whose turn
-        var temp = HttpContext.Current.Session["whoseturnisit"];
+        var temp = HttpContext.Current.Application["whoseturnisit"];
         string temp2 = temp.ToString();
             if (temp2 == "1")
             {
-                HttpContext.Current.Session["whoseturnisit"] = "0";
+                HttpContext.Current.Application["whoseturnisit"] = "0";
             }
             else
             {
-                HttpContext.Current.Session["whoseturnisit"] = "1";
+                HttpContext.Current.Application["whoseturnisit"] = "1";
             }
         return ("D");
 
