@@ -645,8 +645,6 @@ namespace lobby
                 swapuser.SwapWhoseTurn();
 
                 //////////////////////test
-                ///
-
                 //string msg2 = "a";
                 //OneChatRoom message2 = new OneChatRoom(msg2, "0", "0");
                 //list1.Add(message2);
@@ -654,36 +652,20 @@ namespace lobby
                 //list1.Add(message);
                 //list1 = (List<OneChatRoom>)HttpContext.Current.Application["Application_list1"];
 
-
                 //Application["ThisIsFirstPageLoad"] = "1";
-
-
-
-
 
                 ///////////////////
 
 
 
-
-                ////////////////////
-                //in previous page   - whose using current send
-                //var _temp1 = Session["MyUserNumber"];
-                //string _temp1a = _temp1.ToString();
-                //creates this variable from previous page
-                //var _temp2 = Application["ThisIsFirstPageLoad"];
-                //string _temp2a = _temp2.ToString();
-
-                //this is right, don't forget to pick user on previous page (user 2 is zero value)
-                //if (_temp1a == "0")
-                //{
-                    //if (_temp2a == "1")
-                    //{
+                Button6.Enabled = false;
+                Button2.Enabled = false;
+                Button3.Enabled = false;
+                Button4.Enabled = false;
+                Button5.Enabled = false;
 
 
-                        //Application["ThisIsFirstPageLoad"] = "2";
-
-                        ThreadStart childthread2 = new ThreadStart(childthreadcall);
+                ThreadStart childthread2 = new ThreadStart(childthreadcall);
 
                         Thread child2 = new Thread(childthread2);
 
