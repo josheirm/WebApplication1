@@ -113,7 +113,7 @@ namespace lobby
                 Response.Write("in else<br>");
                 //Receive("1");
 
-
+                ////////////////////
                 //in previous page   - whose using current send
                 var temp1 = Session["MyUserNumber"];
                 string temp1a = temp1.ToString();
@@ -126,36 +126,32 @@ namespace lobby
                 {
                     if (temp2a == "1")
                     {
-                        //disables all buttons
-                        //Response.Write("temps<br>");
+                        
 
-
-
-                        //function1();
-                        //this needs to be considered, page reloaded, what happen anyways?
-                        Application["ThisIsFirstPageLoad"] = "2";
+                         Application["ThisIsFirstPageLoad"] = "2";
 
                         ThreadStart childthread = new ThreadStart(childthreadcall);
-                       // Response.Write("Child Thread Started <br/>");
+                       
                         Thread child = new Thread(childthread);
-                       // Response.Write("entering start<br>");
+                      
                         Response.Write("Child Thread Started <br/>");
                         child.Start();
                         var temp3a = Application["WaitingForCode"];
                         string temp3b = temp3a.ToString();
-                        /////
+                       
                         while (temp3b != "yes")
                         {
                             Response.Write("waiting for thred...<br>");
 
                             temp3a = Application["WaitingForCode"];
                             temp3b = temp3a.ToString();
-                            //Thread.Sleep(2000);
+                           
                         }
-                        ////
+                        
                         child.Abort();
+                        Application["WaitingForCode"] = "no";
                         Response.Write("thread done<br>");
-
+                        ///////////////////
 
 
 
@@ -553,8 +549,8 @@ namespace lobby
             if (temp1a == temp2a)
             {
                 Response.Write("2in send message<br>");
-            //    return("a");
-            
+                //    return("a");
+
                 ////make an array that holds real state of buttons
                 ////so restore after all buttons disabled after send
                 if (buttonpressed == "1")
@@ -581,9 +577,9 @@ namespace lobby
 
 
 
-            //wrong pick - send message with code to while of thread,
-            //else
-            //{
+                //wrong pick - send message with code to while of thread,
+                //else
+                //{
 
 
 
@@ -591,7 +587,7 @@ namespace lobby
                 string msg = buttonpressed;
                 //should be 1 - 5 is the message
                 OneChatRoom message = new OneChatRoom(msg, "0", "0");
-                
+
 
 
                 //////////!!!!!!!!!!!!!!!!!!!!!TWO OF THESE!!!! forcing
@@ -646,50 +642,115 @@ namespace lobby
                 //this user will be use the receive
                 //reciever will be sender
                 Response.Write("send message swapping turn<br>");
-                swapuser.SwapWhoseTurn();
+                //swapuser.SwapWhoseTurn();
 
-            //    //this user now waits for a code to be sent back
-            //    ThreadStart childthread = new ThreadStart(childthreadcall);
-            //    Thread child = new Thread(childthread);
+                //////////////////////test
+                ///
 
-            //    //this function has a pause so that reciever is done first, 
-            //    //so we can use Application["WaitingForCode"]; 
+                string msg2 = "a";
+                OneChatRoom message2 = new OneChatRoom(msg2, "0", "0");
+                list1.Add(message2);
+                HttpContext.Current.Application["Application_list1"] = list1;
+                //list1.Add(message);
+                list1 = (List<OneChatRoom>)HttpContext.Current.Application["Application_list1"];
 
 
-            //    //this is the receiver thread, so waits there until recieved message by the new sender, when receive function done 
-            //    //and changes to sender, this sender has swapped and becomes reciever waiting for 
-            //    //message to be sent with button press.
-
-            //    //sender creates a reciever thread that calls the recieve function
-            //    // this thread will be added to by next sender which will finish last again after reciever 
-              
-            //    child.Start();
-            //    Response.Write("in send message waiting for sender<br>");
-            //    //double loop mechanism - creates a 2nd thread again
-            //    //makes sender the reciever
-            //    //this user is now the receiver called by internals
-            //    //the other user will run this send routine
-            //    var temp3b = Application["WaitingForCode"];
-            //    string temp3ba = temp3b.ToString();   
-            //while (temp3ba != "yes")
-            //{
-            //    temp3b = Application["WaitingForCode"];
-            //        temp3ba = temp3b.ToString();
-            //    //Thread.Sleep(2000);
-            //}
-            //    Application["WaitingForCode"] = "no";
-
-            ///////////////
-
-            //child.Abort();
-            //    Response.Write("done send message<br>");
+                //Application["ThisIsFirstPageLoad"] = "1";
 
 
 
-                //end send message
+
+
+                ///////////////////
+
+
+
+
+                ////////////////////
+                //in previous page   - whose using current send
+                //var _temp1 = Session["MyUserNumber"];
+                //string _temp1a = _temp1.ToString();
+                //creates this variable from previous page
+                //var _temp2 = Application["ThisIsFirstPageLoad"];
+                //string _temp2a = _temp2.ToString();
+
+                //this is right, don't forget to pick user on previous page (user 2 is zero value)
+                //if (_temp1a == "0")
+                //{
+                    //if (_temp2a == "1")
+                    //{
+
+
+                        //Application["ThisIsFirstPageLoad"] = "2";
+
+                        ThreadStart childthread2 = new ThreadStart(childthreadcall);
+
+                        Thread child2 = new Thread(childthread2);
+
+                        Response.Write("Child Thread Started <br/>");
+                        child2.Start();
+                        var _temp3a = Application["WaitingForCode"];
+                        string _temp3b = _temp3a.ToString();
+
+                        while (_temp3b != "yes")
+                        {
+                            Response.Write("waiting for thred...<br>");
+
+                            _temp3a = Application["WaitingForCode"];
+                            _temp3b = _temp3a.ToString();
+
+                        }
+                       
+                        child2.Abort();
+                        Application["WaitingForCode"] = "no";
+
+                        Response.Write("thread done<br>");
+                        ///////////////////
+
+
+                        //    //this user now waits for a code to be sent back
+                        //    ThreadStart childthread = new ThreadStart(childthreadcall);
+                        //    Thread child = new Thread(childthread);
+
+                        //    //this function has a pause so that reciever is done first, 
+                        //    //so we can use Application["WaitingForCode"]; 
+
+
+                        //    //this is the receiver thread, so waits there until recieved message by the new sender, when receive function done 
+                        //    //and changes to sender, this sender has swapped and becomes reciever waiting for 
+                        //    //message to be sent with button press.
+
+                        //    //sender creates a reciever thread that calls the recieve function
+                        //    // this thread will be added to by next sender which will finish last again after reciever 
+
+                        //    child.Start();
+                        //    Response.Write("in send message waiting for sender<br>");
+                        //    //double loop mechanism - creates a 2nd thread again
+                        //    //makes sender the reciever
+                        //    //this user is now the receiver called by internals
+                        //    //the other user will run this send routine
+                        //    var temp3b = Application["WaitingForCode"];
+                        //    string temp3ba = temp3b.ToString();   
+                        //while (temp3ba != "yes")
+                        //{
+                        //    temp3b = Application["WaitingForCode"];
+                        //        temp3ba = temp3b.ToString();
+                        //    //Thread.Sleep(2000);
+                        //}
+                        //    Application["WaitingForCode"] = "no";
+
+                        ///////////////
+
+                        //child.Abort();
+                        //    Response.Write("done send message<br>");
+
+
+
+                        //end send message
+                    //}
+                //}
             }
-
-            return ("A");
+                    return ("A");
 
         }
         //////////////////////
