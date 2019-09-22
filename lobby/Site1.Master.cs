@@ -642,17 +642,17 @@ namespace lobby
                 //this user will be use the receive
                 //reciever will be sender
                 Response.Write("send message swapping turn<br>");
-                //swapuser.SwapWhoseTurn();
+                swapuser.SwapWhoseTurn();
 
                 //////////////////////test
                 ///
 
-                string msg2 = "a";
-                OneChatRoom message2 = new OneChatRoom(msg2, "0", "0");
-                list1.Add(message2);
-                HttpContext.Current.Application["Application_list1"] = list1;
+                //string msg2 = "a";
+                //OneChatRoom message2 = new OneChatRoom(msg2, "0", "0");
+                //list1.Add(message2);
+                //HttpContext.Current.Application["Application_list1"] = list1;
                 //list1.Add(message);
-                list1 = (List<OneChatRoom>)HttpContext.Current.Application["Application_list1"];
+                //list1 = (List<OneChatRoom>)HttpContext.Current.Application["Application_list1"];
 
 
                 //Application["ThisIsFirstPageLoad"] = "1";
