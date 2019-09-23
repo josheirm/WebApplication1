@@ -206,8 +206,8 @@ namespace lobby
             //var temp = Session["roomnumber"];
             ///////////////!!!!
 
-            var code = Application["Application_list1"];
-            string code2 = "";
+            //var code = Application["Application_list1"];
+            //string code2 = "";
             //Response.Write("made it <br>");
 
             //Receive(code2); 
@@ -215,26 +215,32 @@ namespace lobby
             /////////////////////////////////////////////////////////
             //{
                 Response.Write("in recieve function<br>");
-                //return ("S");
+            //return ("S");
 
 
 
-                ////////////for testing - sends a message (code)/////////
+            ////////////for testing - sends a message (code)/////////
+            //list1 = (List<OneChatRoom>)Application["Application_list1"];
+            
+            //list1.Add(message);
 
-                //string msg = buttontodisable;
-                //OneChatRoom message = new OneChatRoom(msg, "0", "0");
-                //list1.Add(message);
-                //HttpContext.Current.Application["Application_list1"] = list1;
-                ////list1.Add(message);
-                //list1 = (List<OneChatRoom>)HttpContext.Current.Application["Application_list1"];
+            list1 = (List<OneChatRoom>)Application["Application_list1"];
+            while(list1 == null)
+            {
+                list1 = (List<OneChatRoom>)Application["Application_list1"];
+            }
+            //string msg = "1";
+            //OneChatRoom message = new OneChatRoom(msg, "0", "0");
+            //list1.Add(message);
+            //Application["Application_list1"] = list1;
 
-                ////////////end testing
+            ////////////end testing
 
-                //renew save state 
+            //renew save state 
 
 
-                //TWO OF THESE!!!!! - determined by previous page - hack
-                string roomnumber = "1";
+            //TWO OF THESE!!!!! - determined by previous page - hack
+            string roomnumber = "1";
 
             if (roomnumber == "1")
             {
@@ -635,7 +641,7 @@ namespace lobby
 
 
 
-
+                
 
                 //after this this is not sender, is becoming reciever
                 //reciever already finished
@@ -644,17 +650,7 @@ namespace lobby
                 Response.Write("send message swapping turn<br>");
                 swapuser.SwapWhoseTurn();
 
-                //////////////////////test
-                //string msg2 = "a";
-                //OneChatRoom message2 = new OneChatRoom(msg2, "0", "0");
-                //list1.Add(message2);
-                //HttpContext.Current.Application["Application_list1"] = list1;
-                //list1.Add(message);
-                //list1 = (List<OneChatRoom>)HttpContext.Current.Application["Application_list1"];
-
-                //Application["ThisIsFirstPageLoad"] = "1";
-
-                ///////////////////
+                
 
 
 
@@ -664,30 +660,33 @@ namespace lobby
                 Button4.Enabled = false;
                 Button5.Enabled = false;
 
+                        //////////////////////////////////////////////
+                        
+                        //ThreadStart childthread2 = new ThreadStart(childthreadcall);
 
-                ThreadStart childthread2 = new ThreadStart(childthreadcall);
+                        //Thread child2 = new Thread(childthread2);
 
-                        Thread child2 = new Thread(childthread2);
+                        //Response.Write("Child Thread Started <br/>");
+                        //child2.Start();
+                        //var _temp3a = Application["WaitingForCode"];
+                        //string _temp3b = _temp3a.ToString();
 
-                        Response.Write("Child Thread Started <br/>");
-                        child2.Start();
-                        var _temp3a = Application["WaitingForCode"];
-                        string _temp3b = _temp3a.ToString();
+                        //while (_temp3b != "yes")
+                        //{
+                        //    Response.Write("waiting for thred...<br>");
 
-                        while (_temp3b != "yes")
-                        {
-                            Response.Write("waiting for thred...<br>");
+                        //    _temp3a = Application["WaitingForCode"];
+                        //    _temp3b = _temp3a.ToString();
 
-                            _temp3a = Application["WaitingForCode"];
-                            _temp3b = _temp3a.ToString();
-
-                        }
+                        //}
                        
-                        child2.Abort();
-                        Application["WaitingForCode"] = "no";
+                        //child2.Abort();
+                        //Application["WaitingForCode"] = "no";
 
-                        Response.Write("thread done<br>");
-                        ///////////////////
+                        //Response.Write("thread done<br>");
+                        
+                
+                        ///////////////////////////////////////////////
 
 
                         //    //this user now waits for a code to be sent back
@@ -732,7 +731,8 @@ namespace lobby
                     //}
                 //}
             }
-                    return ("A");
+            Response.Write("got to end of send<br>");
+            return ("A");
 
         }
         //////////////////////
@@ -750,12 +750,12 @@ namespace lobby
 
             ////////////for testing - sends a message (code)/////////
 
-            //string msg = buttontodisable;
-            //OneChatRoom message = new OneChatRoom(msg, "0", "0");
+            string msg = buttontodisable;
+            OneChatRoom message = new OneChatRoom(msg, "0", "0");
+            list1.Add(message);
+            HttpContext.Current.Application["Application_list1"] = list1;
             //list1.Add(message);
-            //HttpContext.Current.Application["Application_list1"] = list1;
-            ////list1.Add(message);
-            //list1 = (List<OneChatRoom>)HttpContext.Current.Application["Application_list1"];
+            list1 = (List<OneChatRoom>)HttpContext.Current.Application["Application_list1"];
 
             ////////////end testing
 
