@@ -102,6 +102,8 @@ namespace lobby
 
             else
             {
+                //NewResponseCall();
+                //SendMessage("2");
                 //works
 
                 //string msg4 = "z";
@@ -120,7 +122,7 @@ namespace lobby
 
                 //Random rand2 = new Random();
                 //needs to be reworked
-                rand2 = "1";
+                rand2 = "2";
                 Response.Write("in else<br>");
                 //in previous page   - whose using current send
                 var temp1 = Session["MyUserNumber"];
@@ -183,15 +185,40 @@ namespace lobby
             {
 
                 var firstItem = list1.ElementAt(0);
+                string _firstItem = firstItem.Strin;
                 list1.RemoveAt(0);
-                //int item = firstItem.Strin;
-
-
-                //holdsbuttonspressed[item] = "1";
-                
                 //kept current
                 Application["Application_list1"] = list1;
 
+                /////////////
+
+                if (_firstItem == "1")
+                {
+                    holdsbuttonspressed[0] = "1";
+                }
+                if (_firstItem == "2")
+                {
+                    holdsbuttonspressed[1] = "1";
+                }
+                if (_firstItem == "3")
+                {
+                    holdsbuttonspressed[2] = "1";
+                }
+                if (_firstItem == "4")
+                {
+                    holdsbuttonspressed[3] = "1";
+
+                }
+                if  (_firstItem == "5")
+                {
+                    holdsbuttonspressed[4] = "1";
+                }
+
+
+
+                ////////////
+
+                
 
 
             }
@@ -227,6 +254,7 @@ namespace lobby
             //}
 
             ////enable / disable buttons
+            Response.Write("update buttons - swap user<br>");
             UpdateButtons(new object(), new EventArgs());
 
 
@@ -247,19 +275,20 @@ namespace lobby
 
 
 
-            
-            /////////////////////////////////////////////////////////
 
+            /////////////////////////////////////////////////////////
+            Response.Write("waiting for each user to complete function<br>");
             Application["WaitingForReciever"] = "done";
             while (flag == "1")
             {
                 var waitforsender = Application["WaitingForSender"];
                 string waitforsend = waitforsender.ToString();
-                var waitforreceiver = Application["WaitingForReciever"];
-                string waitforrec = waitforreceiver.ToString();
-                if(waitforrec == "done" && waitforsend == "done")
+                //var waitforreceiver = Application["WaitingForReciever"];
+                //string waitforrec = waitforreceiver.ToString();
+                if(waitforsend == "done")
                 {
                     flag = "0";
+                    waitforsend = "not done";
                 }
 
             }
@@ -414,7 +443,7 @@ namespace lobby
         }
             protected void UpdateButtons(object sender, EventArgs e)
         {
-
+            Response.Write("in update buttons<br>");
             Button6.Enabled = true;
             Button2.Enabled = true;
             Button3.Enabled = true;
@@ -457,22 +486,22 @@ namespace lobby
             
             Response.Write("in send message<br>");
 
-            Button6.Enabled = false;
-            Button2.Enabled = false;
-            Button3.Enabled = false;
-            Button4.Enabled = false;
-            Button5.Enabled = false;
+            //Button6.Enabled = false;
+            //Button2.Enabled = false;
+            //Button3.Enabled = false;
+            //Button4.Enabled = false;
+            //Button5.Enabled = false;
 
 
 
-            var temp1 = Application["whoseturnisit"];
-            var temp2 = Session["MyUserNumber"];
-            string temp1a = temp1.ToString();
-            string temp2a = temp2.ToString();
+            //var temp1 = Application["whoseturnisit"];
+            //var temp2 = Session["MyUserNumber"];
+            //string temp1a = temp1.ToString();
+            //string temp2a = temp2.ToString();
 
             
-            if (temp1a == temp2a)
-            {
+            //if (temp1a == temp2a)
+            //{
                 Response.Write("  2:  in send message<br>");
                
 
@@ -554,23 +583,25 @@ namespace lobby
 
                 
 
-                string flag = "1";
+                string flag2 = "1";
                 Application["WaitingForSender"] = "done";
-                while (flag == "1")
+                while (flag2 == "1")
                 {
-                    var waitforsender = Application["WaitingForSender"];
-                    string waitforsend = waitforsender.ToString();
+                    //var waitforsender = Application["WaitingForSender"];
+                    //string waitforsend = waitforsender.ToString();
                     var waitforreceiver = Application["WaitingForReciever"];
                     string waitforrec = waitforreceiver.ToString();
-                    if (waitforrec == "done" && waitforsend == "done")
+                    if (waitforrec == "done")
                     {
-                        flag = "0";
+                        flag2 = "0";
+                        waitforrec = "not done";
                     }
 
                 }
-                NewResponseCall();
+                Response.Write("at end, call response<br>");
+         //       NewResponseCall();
 
-            }
+            //}
             
             return ("A");
 
