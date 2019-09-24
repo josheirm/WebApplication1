@@ -40,13 +40,13 @@ public class OneChatRoom
     {
 
 
-        this.Strin = -1;
+        this.Strin = a;
 
         this.Personis = Personis;
         this.Chatroomname = Chatroomname;
 
     }
-    public int Strin { get; set; }
+    public string Strin { get; set; }
     public string Personis { get; set; }
     public string Chatroomname { get; set; }
 
@@ -102,6 +102,20 @@ namespace lobby
 
             else
             {
+                //works
+
+                //string msg4 = "z";
+                //OneChatRoom messagez = new OneChatRoom(msg4, "0", "0");
+
+                //list3.Add(messagez);
+                //list3.Add(messagez);
+
+                //Application["test"] = list3;
+                //var list4 = (List<OneChatRoom>)Application["test"];
+
+                //var firstItem2 = list4.ElementAt(0);
+                //string item2 = firstItem2.Strin;
+                //Page.ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + item2 + "');", true);
 
 
                 //Random rand2 = new Random();
@@ -115,36 +129,24 @@ namespace lobby
                 var temp2 = Application["ThisIsFirstPageLoad"];
                 string temp2a = temp2.ToString();
 
-                 //starting, user two goes in these (previous page)
+                //starting, user two goes in these (previous page)
                 if (temp1a == "0")
                 {
                     if (temp2a == "1")
                     {
-                        
 
-                         Application["ThisIsFirstPageLoad"] = "2";
+
+                        Application["ThisIsFirstPageLoad"] = "2";
 
                         Response.Write("new response call<br>");
                         NewResponseCall();
 
-                        
-                        ///////////////////
-
-
-
-
-                       
                     }
+
                 }
 
-
             }
-
-
-
-            //return ("B");
         }
-
         public void  function1()
         {
             AllDisabledClick(new object(), new EventArgs());
@@ -182,10 +184,10 @@ namespace lobby
 
                 var firstItem = list1.ElementAt(0);
                 list1.RemoveAt(0);
-                int item = firstItem.Strin;
+                //int item = firstItem.Strin;
 
 
-                holdsbuttonspressed[item] = "1";
+                //holdsbuttonspressed[item] = "1";
                 
                 //kept current
                 Application["Application_list1"] = list1;
