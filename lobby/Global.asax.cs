@@ -30,7 +30,7 @@ namespace lobby
         {
             //user num 1 is 1, user num 0 is two
             Session["MyUserNumber"] = "0";
-
+            Session["testit"] = "false";
         }
 
         protected void Application_BeginRequest(object sender, EventArgs e)
