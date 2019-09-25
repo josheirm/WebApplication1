@@ -96,6 +96,16 @@ namespace lobby
             if (Page.IsPostBack)
             {
                 Response.Write("in postback<br>");
+                var temp = Session["testit"];
+                string temp2 = temp.ToString();
+                if (temp2 == "true")
+                {
+                    SendMessage("1");
+                    
+
+                    Session["testit"] = "false";
+
+                }
 
             }
 
@@ -109,7 +119,11 @@ namespace lobby
                 //string msg4 = "z";
                 //OneChatRoom messagez = new OneChatRoom(msg4, "0", "0");
 
-                //list3.Add(messagez);
+                //list1.Add(messagez);
+                //Application["Application_list1"] = list1;
+
+
+
                 //list3.Add(messagez);
 
                 //Application["test"] = list3;
@@ -158,7 +172,7 @@ namespace lobby
         //called with thread while waiting on send - just room one for now
         public void NewResponseCall()
         {
-
+            
             
 
             string flag = "1";
@@ -172,11 +186,11 @@ namespace lobby
             //waits for list to be added too
 
             list1 = (List<OneChatRoom>)Application["Application_list1"];
-            while(list1 == null)
+            while (list1 ==  null || list1.Count() == 0)
             {
                 list1 = (List<OneChatRoom>)Application["Application_list1"];
             }
-            
+            Application["Application_list1"] = list1;
 
             //TWO OF THESE!!!!! - determined by previous page - hack
             string roomnumber = "1";
@@ -318,13 +332,15 @@ namespace lobby
                 Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "alert('You Win!'); ", true);
 
             }
+            Session["testit"] = "true";
             Button6.Enabled = false;
             Button2.Enabled = false;
             Button3.Enabled = false;
             Button4.Enabled = false;
             Button5.Enabled = false;
-            SendMessage("1");
             
+            //SendMessage("1");
+            //NewResponseCall();
 
         }
         protected void Button2_Click(object sender, EventArgs e)
@@ -400,7 +416,7 @@ namespace lobby
             Button3.Enabled = false;
             Button4.Enabled = false;
             Button5.Enabled = false;
-            string a = SendMessage("test");
+            SendMessage("test");
            
         }
         //player 2
@@ -485,7 +501,8 @@ namespace lobby
         {
             
             Response.Write("in send message<br>");
-
+            //AllDisabledClick(new object(), new EventArgs());
+            
             //Button6.Enabled = false;
             //Button2.Enabled = false;
             //Button3.Enabled = false;
@@ -499,10 +516,10 @@ namespace lobby
             //string temp1a = temp1.ToString();
             //string temp2a = temp2.ToString();
 
-            
+
             //if (temp1a == temp2a)
             //{
-                Response.Write("  2:  in send message<br>");
+            Response.Write("  2:  in send message<br>");
                
 
                 ////make an array that holds real state of buttons
@@ -552,7 +569,7 @@ namespace lobby
                 {
                     case 1:
                         list1.Add(message);
-                        HttpContext.Current.Application["Application_list1"] = list1;
+                        Application["Application_list1"] = list1;
                         break;
 
                     case 2:
@@ -599,10 +616,11 @@ namespace lobby
 
                 }
                 Response.Write("at end, call response<br>");
-         //       NewResponseCall();
+            NewResponseCall();
+            //with this call buttons don't disable in here (recieveer disables) : send message
 
             //}
-            
+
             return ("A");
 
         }
